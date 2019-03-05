@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ecfdc91e-bb86-4c6b-886a-ca4aeae9c404" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nightwatch.json" beforeDir="false" afterPath="$PROJECT_DIR$/nightwatch.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -14,19 +15,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/node_modules/nightwatch/package.json">
+        <entry file="file://$PROJECT_DIR$/nightwatch.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="159">
-              <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/googleDemoTest.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+            <state relative-caret-position="19">
+              <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -40,6 +32,18 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>invest_v1</find>
+      <find>selenium</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>podcaststream</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -51,6 +55,7 @@
         <option value="$PROJECT_DIR$/test/stackTest.js" />
         <option value="$PROJECT_DIR$/googleDemoTest.js" />
         <option value="$PROJECT_DIR$/node_modules/nightwatch/package.json" />
+        <option value="$PROJECT_DIR$/nightwatch.json" />
       </list>
     </option>
   </component>
@@ -80,17 +85,6 @@
             <path>
               <item name="podcaststream" type="b2602c69:ProjectViewProjectNode" />
               <item name="podcaststream" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="podcaststream" type="b2602c69:ProjectViewProjectNode" />
-              <item name="podcaststream" type="462c0819:PsiDirectoryNode" />
-              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
-              <item name="nightwatch" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="podcaststream" type="b2602c69:ProjectViewProjectNode" />
-              <item name="podcaststream" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -103,7 +97,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551816701927" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551829368711" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -164,7 +158,7 @@
       <workItem from="1551721800240" duration="745000" />
       <workItem from="1551811747560" duration="66000" />
       <workItem from="1551812283938" duration="32000" />
-      <workItem from="1551812625422" duration="1857000" />
+      <workItem from="1551812625422" duration="2737000" />
     </task>
     <task id="LOCAL-00001" summary="Added push and pop value features">
       <created>1550378617366</created>
@@ -187,11 +181,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551812933104</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Removed old mentions of &quot;invest_v1&quot; project. Updated the Nightwatch demo test.">
+      <created>1551816777097</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1551816777097</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24821000" />
+    <option name="totallyTimeSpent" value="25701000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -260,7 +261,8 @@
     <MESSAGE value="Added push and pop value features" />
     <MESSAGE value="Added pop-stop-at-size-zero feature" />
     <MESSAGE value="Moved all stack and training-related material do &quot;old&quot;&#10;(aka archive) folders" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved all stack and training-related material do &quot;old&quot;&#10;(aka archive) folders" />
+    <MESSAGE value="Removed old mentions of &quot;invest_v1&quot; project. Updated the Nightwatch demo test." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed old mentions of &quot;invest_v1&quot; project. Updated the Nightwatch demo test." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.core.d.ts">
@@ -297,20 +299,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/googleDemoTest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="36" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/nightwatch/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="159">
+        <state relative-caret-position="608">
           <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/nightwatch/bin/nightwatch.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-399" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/nightwatch/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="-15" />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/googleDemoTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="2" lean-forward="true" selection-start-line="15" selection-start-column="2" selection-end-line="15" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nightwatch.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="26" selection-start-line="1" selection-start-column="26" selection-end-line="1" selection-end-column="26" />
         </state>
       </provider>
     </entry>

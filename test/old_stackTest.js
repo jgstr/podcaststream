@@ -1,5 +1,5 @@
 import {expect} from "chai";
-import {createStack, push, pop} from "../stack";
+import {createStack, push, pop} from "../z_old/stack";
 
 describe("Stack", function(){
     it("should return 0 size", function(){

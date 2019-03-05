@@ -1,0 +1,45 @@
+{
+  "name": "podcaststream",
+  "version": "1.0.0",
+  "description": "A web application for casters to broadcast their shows all the time.",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha --require @babel/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgstr/podcaststream.git"
+  },
+  "keywords": [
+    "podcast",
+    "stream",
+    "audio",
+    "broadcast"
+  ],
+  "author": "Aaron Goold",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jgstr/podcaststream/issues"
+  },
+  "homepage": "https://github.com/jgstr/podcaststream#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "geckodriver": "^1.14.1",
+    "handlebars": "^4.1.0",
+    "nightwatch": "^1.0.19",
+    "sinon": "^7.2.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/register": "^7.0.0",
+    "chai": "^4.2.0",
+    "chromedriver": "^2.46.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.10"
+  }
+}

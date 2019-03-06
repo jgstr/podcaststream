@@ -38,6 +38,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",
     "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "chromedriver": "^2.46.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.10"

@@ -1,28 +1,15 @@
 // import methods from files to test
 import {expect} from "chai";
+import {serverTest} from "../test/serverTest";
 
 describe("End-to-end", function(){
 
     it("should return response status code 200 from web server", function(){
 
-        // Starts web server (Express? Via app.js?)
-        const express = require('express');
-        const app = express();
+        // Starts web server with Express on localhost:3000
+        // Ideally, I should use chai-http feature to automatically start/stop the server
+        let app = serverTest();
 
-        let responseStatusCode;
-
-        app.get('/', (req, res) => {
-            res.send('Broadcast Test');
-            responseStatusCode = res.statusCode;
-            console.log(res.statusCode);
-        });
-
-        app.listen(3000, () => console.log('Server is listening on port 3000'));
-
-        // Nightwatch should run before this to make the request and provide a value for
-        // responseStatusCode.
-
-        expect(responseStatusCode).to.equal(200);
 
         // Starts database (docker?)
 
@@ -34,6 +21,7 @@ describe("End-to-end", function(){
         // Sends request through browser
 
         // Receives and stores response in "response"
+        expect(app.response.statusCode).to.equal(200);
 
 
     });

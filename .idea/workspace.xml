@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ecfdc91e-bb86-4c6b-886a-ca4aeae9c404" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/endToEndTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/endToEndTest.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -16,8 +17,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/endToEndTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="475">
-              <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+            <state relative-caret-position="363">
+              <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -110,7 +111,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551896374032" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551904377523" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -172,7 +173,8 @@
       <workItem from="1551811747560" duration="66000" />
       <workItem from="1551812283938" duration="32000" />
       <workItem from="1551812625422" duration="2885000" />
-      <workItem from="1551893375979" duration="2218000" />
+      <workItem from="1551893375979" duration="2438000" />
+      <workItem from="1551901245929" duration="2158000" />
     </task>
     <task id="LOCAL-00001" summary="Added push and pop value features">
       <created>1550378617366</created>
@@ -209,17 +211,24 @@
       <option name="project" value="LOCAL" />
       <updated>1551829420541</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Created first E2E Nightwatch test, thought I'm not sure if it's correct at all. At least it can run via a 2nd terminal while the node/express server is running and read the web page provided by express.">
+      <created>1551896489579</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1551896489579</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28067000" />
+    <option name="totallyTimeSpent" value="30445000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2098501" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21325648" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -237,7 +246,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32896066" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.4591322" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.45869297" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -299,7 +308,8 @@
     <MESSAGE value="Moved all stack and training-related material do &quot;old&quot;&#10;(aka archive) folders" />
     <MESSAGE value="Removed old mentions of &quot;invest_v1&quot; project. Updated the Nightwatch demo test." />
     <MESSAGE value="Add new Nightwatch Demo Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add new Nightwatch Demo Test" />
+    <MESSAGE value="Created first E2E Nightwatch test, thought I'm not sure if it's correct at all. At least it can run via a 2nd terminal while the node/express server is running and read the web page provided by express." />
+    <option name="LAST_COMMIT_MESSAGE" value="Created first E2E Nightwatch test, thought I'm not sure if it's correct at all. At least it can run via a 2nd terminal while the node/express server is running and read the web page provided by express." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.core.d.ts">
@@ -323,9 +333,6 @@
           <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/nightwatch/package.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -354,13 +361,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/old_stackTest.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/googleDemoTest.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -371,6 +371,9 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/endToEndNightwatchTest.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -378,10 +381,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/old_stackTest.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/endToEndTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="8" selection-start-line="25" selection-start-column="8" selection-end-line="25" selection-end-column="8" />
+        <state relative-caret-position="363">
+          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="49" />
         </state>
       </provider>
     </entry>

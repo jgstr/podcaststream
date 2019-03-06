@@ -1,19 +1,28 @@
-import {expect} from "chai";
 // import methods from files to test
+import {expect} from "chai";
 
 describe("End-to-end", function(){
 
-    it("should return response OK from web server", function(){
+    it("should return response status code 200 from web server", function(){
 
         // Starts web server (Express? Via app.js?)
         const express = require('express');
         const app = express();
 
+        let responseStatusCode;
+
         app.get('/', (req, res) => {
             res.send('Broadcast Test');
+            responseStatusCode = res.statusCode;
+            console.log(res.statusCode);
         });
 
         app.listen(3000, () => console.log('Server is listening on port 3000'));
+
+        // Nightwatch should run before this to make the request and provide a value for
+        // responseStatusCode.
+
+        expect(responseStatusCode).to.equal(200);
 
         // Starts database (docker?)
 
@@ -26,11 +35,7 @@ describe("End-to-end", function(){
 
         // Receives and stores response in "response"
 
-        let response = "200";
 
-        expect(response).to.equal("200");
     });
-
-
 
 });

@@ -2,7 +2,7 @@
 import {expect} from "chai";
 import {serverTest} from "../test/serverTest";
 
-describe("End-to-end", function(){
+describe("podcast stream", function(){
 
     it("should return response status code 200 from web server", function(){
 

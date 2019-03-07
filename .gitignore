@@ -1,5 +1,6 @@
 *.DS_Store
-.DS_Store
 node_modules
 chromedriver.log
 tests_output
+*.iml
+*/.idea

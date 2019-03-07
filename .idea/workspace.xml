@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ecfdc91e-bb86-4c6b-886a-ca4aeae9c404" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/endToEndTest.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/endToEndTest.js" afterDir="false" />
-    </list>
+    <list default="true" id="ecfdc91e-bb86-4c6b-886a-ca4aeae9c404" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +14,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/endToEndTest.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="437">
-              <caret line="23" column="54" lean-forward="true" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+            <state relative-caret-position="289">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
               <folding>
                 <element signature="e#37#65#0" expanded="true" />
               </folding>
@@ -113,7 +108,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551908763662" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551914405319" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -177,7 +172,7 @@
       <workItem from="1551812625422" duration="2885000" />
       <workItem from="1551893375979" duration="2438000" />
       <workItem from="1551901245929" duration="2232000" />
-      <workItem from="1551906952776" duration="1572000" />
+      <workItem from="1551906952776" duration="1965000" />
     </task>
     <task id="LOCAL-00001" summary="Added push and pop value features">
       <created>1550378617366</created>
@@ -228,15 +223,21 @@
       <option name="project" value="LOCAL" />
       <updated>1551904438103</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Slightly better implementation of the manual HTTP response test.">
+      <created>1551908818465</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1551908818465</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32091000" />
+    <option name="totallyTimeSpent" value="32484000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21573876" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -256,7 +257,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32896066" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.45812312" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.45812312" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -320,7 +321,8 @@
     <MESSAGE value="Add new Nightwatch Demo Test" />
     <MESSAGE value="Created first E2E Nightwatch test, thought I'm not sure if it's correct at all. At least it can run via a 2nd terminal while the node/express server is running and read the web page provided by express." />
     <MESSAGE value="More modifications and attempts to make sense of what I need for my first E2E test." />
-    <option name="LAST_COMMIT_MESSAGE" value="More modifications and attempts to make sense of what I need for my first E2E test." />
+    <MESSAGE value="Slightly better implementation of the manual HTTP response test." />
+    <option name="LAST_COMMIT_MESSAGE" value="Slightly better implementation of the manual HTTP response test." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es2015.core.d.ts">
@@ -408,8 +410,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/endToEndTest.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="54" lean-forward="true" selection-start-line="23" selection-start-column="54" selection-end-line="23" selection-end-column="54" />
+        <state relative-caret-position="289">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
           <folding>
             <element signature="e#37#65#0" expanded="true" />
           </folding>

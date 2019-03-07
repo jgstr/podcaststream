@@ -3,4 +3,4 @@ node_modules
 chromedriver.log
 tests_output
 *.iml
-.idea/
+.idea

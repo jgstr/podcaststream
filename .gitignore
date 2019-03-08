@@ -4,3 +4,4 @@ chromedriver.log
 tests_output
 *.iml
 .idea
+resources

@@ -4,7 +4,8 @@
   "description": "A web application for casters to broadcast their shows all the time.",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --require @babel/register"
+    "test": "mocha --require @babel/register",
+    "e2e": "nightwatch"
   },
   "repository": {
     "type": "git",

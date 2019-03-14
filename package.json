@@ -42,6 +42,7 @@
     "chai-http": "^4.2.1",
     "chromedriver": "^2.46.0",
     "mocha": "^5.2.0",
+    "node-docker-api": "^1.1.22",
     "nodemon": "^1.18.10"
   }
 }

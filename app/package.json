@@ -1,0 +1,30 @@
+{
+  "name": "podcaststream-server",
+  "version": "1.0.0",
+  "description": "The server for the audio broadcasting app.",
+  "main": "app.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgstr/podcaststream.git"
+  },
+  "keywords": [
+    "podcast",
+    "stream",
+    "audio",
+    "broadcast"
+  ],
+  "author": "Aaron Goold",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jgstr/podcaststream/issues"
+  },
+  "homepage": "https://github.com/jgstr/podcaststream#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "handlebars": "^4.1.0"
+  }
+}

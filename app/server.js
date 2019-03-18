@@ -9,6 +9,8 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 app.get('/server-status', (req, res) => {
+
+    // Now the database needs to deliver this message to "trigger"  #go-status
     res.send('<div id=go-status>Broadcasting</div>\n');
 });
 

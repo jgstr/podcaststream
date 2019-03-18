@@ -8,5 +8,4 @@ ENV MYSQL_HOST db
 
 EXPOSE 3306
 
-# TODO make the relevant SQL scripts to create a table
-COPY ./name-of-scripts /docker-entrypoint-initdb.d/
+COPY ./sql-scripts /docker-entrypoint-initdb.d/

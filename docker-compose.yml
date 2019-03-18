@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  database:
+    build: ./database
+    environment:
+      MYSQL_DATABASE: broadcast
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+  app:
+    build: ./app
+    ports:
+      - "9000:9000"
+    depends_on:
+      - database
+    restart: on-failure

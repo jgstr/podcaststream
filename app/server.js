@@ -9,16 +9,17 @@ const HOST = '0.0.0.0';
 // Connect to MySQL Database
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-    host     : 'localhost',
-    port     : '3306',
+    host: process.env.DATABASE_HOST || '127.0.0.1',
+    port     : 3306,
     user     : 'root',
     password : 'root',
     database : 'broadcast'
 });
 
+
 connection.connect();
 
-var result;
+let result;
 
 connection.query('SELECT status FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
 
@@ -30,7 +31,9 @@ connection.query('SELECT status FROM broadcaster WHERE id=1 LIMIT 1', function (
     console.log('The status is: ', results[0].status);
 });
 
+
 connection.end();
+
 
 // App
 const app = express();

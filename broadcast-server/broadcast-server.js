@@ -35,7 +35,7 @@ function insertUrlToDatabase() {
 setTimeout(insertUrlToDatabase, 13000);
 
 if(!result) {
-    result = "nothing was added in result";
+    result = "Nothing was added in result";
 }
 
 
@@ -44,7 +44,7 @@ const app = express();
 app.get('/broadcast-server-status', (req, res) => {
 
     // Now the database needs to deliver this message to "trigger"  #go-status
-    res.send(`<div id=go-status>${result}</div>\n`);
+    res.send(`<div id=go-status>${result} from Broadcast server</div>\n`);
 });
 
 app.listen(PORT, HOST);

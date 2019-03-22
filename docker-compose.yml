@@ -11,5 +11,15 @@ services:
       - DATABASE_HOST=db
     links:
       - db
+  broadcast-server:
+    build: ./broadcast-server
+    ports:
+      - 9001:9001
+    depends_on:
+      - db
+    environment:
+      - DATABASE_HOST=db
+    links:
+      - db
   db:
     build: ./database

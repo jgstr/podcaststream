@@ -7,7 +7,7 @@ const PORT = 9000;
 const HOST = '0.0.0.0';
 
 // Connect to MySQL Database
-var mysql      = require('mysql');
+const mysql    = require('mysql');
 var connection = mysql.createConnection({
     host: process.env.DATABASE_HOST || '127.0.0.1',
     port     : 3306,
@@ -19,18 +19,7 @@ var connection = mysql.createConnection({
 let result;
 
 
-/*
-
-TODO: ADDRESS SERVER CALL TO DELAYED DATABASE INITIALIZED FROM DOCKER-COMPOSE
-
-When using docker-compose: app/server.js starts too soon and calls the MYSQL database before it initializes.
-That's why the setTimeout timer is used below. Without that, node returns an ECONNREFUSED error.
-
-For some reason, docker-compose does not check if MySQL has completely initialized before before starting the node
-server. So I will need to find a way to make docker-compose wait until MySQL is ready before running the node server.
-
- */
-
+// TODO: MySQL takes too long to load from docker-compose. Need check/handle health via the application logic.
 
 function connectToDatabase() {
 
@@ -42,17 +31,17 @@ function connectToDatabase() {
             throw error;
         }
 
-    result = results[0].status;
-    console.log('The status is: ', results[0].status);
+        result = results[0].status;
+        console.log('The status is: ', results[0].status);
 
     });
 
 
-connection.end();
+    connection.end();
 
 }
 
-setTimeout(connectToDatabase, 15000);
+setTimeout(connectToDatabase, 20000);
 
 if(!result) {
     result = "nothing was added in result";

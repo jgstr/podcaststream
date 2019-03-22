@@ -1,3 +1,3 @@
 INSERT INTO broadcaster (status)
 VALUES
-    ('Broadcasting');
+    ('App server has connected to database.');

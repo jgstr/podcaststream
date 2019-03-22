@@ -1,0 +1,19 @@
+{
+  "name": "broadcast-server",
+  "version": "1.0.0",
+  "description": "The service to serve the audio broadcasts",
+  "main": "broadcast-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgstr/podcaststream.git"
+  },
+  "author": "Aaron Goold",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgstr/podcaststream/issues"
+  },
+  "homepage": "https://github.com/jgstr/podcaststream#readme"
+}

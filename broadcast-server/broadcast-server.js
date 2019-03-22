@@ -3,7 +3,7 @@
 const express = require('express');
 
 // Constants
-const PORT = 9000;
+const PORT = 9001;
 const HOST = '0.0.0.0';
 
 // Connect to MySQL Database
@@ -20,27 +20,19 @@ let result;
 
 
 // TODO: MySQL takes too long to load from docker-compose. Need check/handle health via the application logic.
-function connectToDatabase() {
+function insertUrlToDatabase() {
 
     connection.connect();
 
-    connection.query('SELECT status FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
-
-        if (error) {
-            throw error;
-        }
-
-        result = results[0].status;
-        console.log('The status is: ', results[0].status);
-
-    });
-
+    // Insert broadcast URL into database
+    console.log("Broadcast server connected to the database.");
 
     connection.end();
 
 }
 
-setTimeout(connectToDatabase, 20000);
+// TODO: 'timeout' must occur BEFORE 'timeout' in app/server.js. Server.js pulls data from this script.
+setTimeout(insertUrlToDatabase, 13000);
 
 if(!result) {
     result = "nothing was added in result";
@@ -49,7 +41,7 @@ if(!result) {
 
 // App
 const app = express();
-app.get('/server-status', (req, res) => {
+app.get('/broadcast-server-status', (req, res) => {
 
     // Now the database needs to deliver this message to "trigger"  #go-status
     res.send(`<div id=go-status>${result}</div>\n`);

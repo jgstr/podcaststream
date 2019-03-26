@@ -23,20 +23,21 @@ let result;
 function insertUrlToDatabase() {
 
     connection.connect();
+    console.log("Connected to the database.");
 
     // Insert broadcast URL into database
-    console.log("Broadcast server connected to the database.");
+    connection.query('INSERT INTO broadcaster (status) VALUES (\'http://localhost:9001/broadcast-server-status\')',
+                   function(error, results, fields) {
+        if(error) throw error;
+        console.log("URL added to database.");
+    });
 
     connection.end();
 
 }
 
-// TODO: 'timeout' must occur BEFORE 'timeout' in app/server.js. Server.js pulls data from this script.
+// TODO: 'timeout' here must occur BEFORE 'timeout' in app/server.js. Server.js pulls data from this script.
 setTimeout(insertUrlToDatabase, 13000);
-
-if(!result) {
-    result = "Nothing was added in result";
-}
 
 
 // App
@@ -44,7 +45,7 @@ const app = express();
 app.get('/broadcast-server-status', (req, res) => {
 
     // Now the database needs to deliver this message to "trigger"  #go-status
-    res.send(`<div id=go-status>${result} from Broadcast server</div>\n`);
+    res.send("<div id=go-status>Broadcaster is running</div>\n");
 });
 
 app.listen(PORT, HOST);

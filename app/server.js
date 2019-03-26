@@ -1,6 +1,6 @@
 'use strict';
-
 const express = require('express');
+const request = require('request');
 
 // Constants
 const PORT = 9000;
@@ -24,13 +24,16 @@ function connectToDatabase() {
 
     connection.connect();
 
-    connection.query('SELECT status FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
+    // This should get the URL inserted from broadcast-server.js
+    connection.query('SELECT status FROM broadcaster WHERE id=2 LIMIT 1', function (error, results, fields) {
 
         if (error) {
             throw error;
         }
 
         result = results[0].status;
+
+        // TODO: 'status' should now be the URL of the broadcast. Must change in database/sql-scripts files
         console.log('The status is: ', results[0].status);
 
     });
@@ -40,19 +43,33 @@ function connectToDatabase() {
 
 }
 
+// TODO: I need to understand this setTimeout / async feature of node. It's causing a lot of problems.
 setTimeout(connectToDatabase, 20000);
 
 if(!result) {
-    result = "nothing was added in result";
+    result = "No result.";
 }
 
+// Get the respose status of the Broadcaster URL
+let broadcastResponseStatusCode;
+
+request(result, function (error, response, html) {
+
+    if(!error && response.statusCode == 200) {
+        broadcastResponseStatusCode = response.statusCode();
+    } else {
+        throw error;
+    }
+
+});
 
 // App
 const app = express();
+
 app.get('/server-status', (req, res) => {
 
-    // Now the database needs to deliver this message to "trigger"  #go-status
-    res.send(`<div id=go-status>${result}</div>\n`);
+    res.send(`<div id=go-status>The broadcast response status code is: ${broadcastResponseStatusCode}</div>`);
+
 });
 
 app.listen(PORT, HOST);

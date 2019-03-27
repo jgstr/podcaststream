@@ -1,4 +1,4 @@
 CREATE TABLE broadcaster (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    status VARCHAR(255) NOT NULL
+    url VARCHAR(255) NOT NULL
 );

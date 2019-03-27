@@ -25,8 +25,9 @@ function insertUrlToDatabase() {
     connection.connect();
     console.log("Connected to the database.");
 
-    // Insert broadcast URL into database
-    connection.query('INSERT INTO broadcaster (status) VALUES (\'http://localhost:9001/broadcast-server-status\')',
+    // Insert broadcast URL into database. Note: this URL is also added via the insert-data.sql used by the
+    // database/Dockerfile.
+    connection.query('INSERT INTO broadcaster (url) VALUES (\'http://localhost:9001/broadcast-server-status\')',
                    function(error, results, fields) {
         if(error) throw error;
         console.log("URL added to database.");

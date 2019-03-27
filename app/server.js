@@ -17,6 +17,7 @@ var connection = mysql.createConnection({
 });
 
 let result;
+let broadcastResponseStatusCode;
 
 
 // TODO: MySQL takes too long to load from docker-compose. Need check/handle health via the application logic.
@@ -25,43 +26,61 @@ function connectToDatabase() {
     connection.connect();
 
     // This should get the URL inserted from broadcast-server.js
-    connection.query('SELECT status FROM broadcaster WHERE id=2 LIMIT 1', function (error, results, fields) {
+    connection.query('SELECT * FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
 
         if (error) {
             throw error;
         }
 
-        result = results[0].status;
+        result = results[0].url;
 
-        // TODO: 'status' should now be the URL of the broadcast. Must change in database/sql-scripts files
-        console.log('The status is: ', results[0].status);
+        console.log('The status is: ', results[0].url);
 
     });
 
 
     connection.end();
 
+
+// Get the response status of the Broadcaster URL
+    // TODO: I don't know how to make a request from the server container to the database container. Need to find that.
+    request("http:/localhost:9001/broadcast-server-status", function (error, response, html) {
+
+        if(!error && response.statusCode == 200) {
+            broadcastResponseStatusCode = response.statusCode();
+        } else {
+
+            throw error;
+        }
+
+    });
+
 }
 
 // TODO: I need to understand this setTimeout / async feature of node. It's causing a lot of problems.
 setTimeout(connectToDatabase, 20000);
 
-if(!result) {
-    result = "No result.";
+// if(!result) {
+//     result = "No result.";
+// }
+//
+// // Get the response status of the Broadcaster URL
+// let broadcastResponseStatusCode;
+//
+// request(result, function (error, response, html) {
+//
+//     if(!error && response.statusCode == 200) {
+//         broadcastResponseStatusCode = response.statusCode();
+//     } else {
+//         throw error;
+//     }
+//
+// });
+
+// For debugging only. DELETE THIS:
+if (broadcastResponseStatusCode === null) {
+    broadcastResponseStatusCode = "http://localhost:9001/broadcast-server-status";
 }
-
-// Get the respose status of the Broadcaster URL
-let broadcastResponseStatusCode;
-
-request(result, function (error, response, html) {
-
-    if(!error && response.statusCode == 200) {
-        broadcastResponseStatusCode = response.statusCode();
-    } else {
-        throw error;
-    }
-
-});
 
 // App
 const app = express();

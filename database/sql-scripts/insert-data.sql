@@ -1,3 +1,3 @@
-INSERT INTO broadcaster (status)
+INSERT INTO broadcaster (url)
 VALUES
-    ('App server has connected to database.');
+    ('http:localhost:9001/broadcast-server-status.');

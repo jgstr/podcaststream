@@ -20,12 +20,12 @@ let result;
 let broadcastResponseStatusCode;
 
 
-// TODO: MySQL takes too long to load from docker-compose. Need check/handle health via the application logic.
-function connectToDatabase() {
+// TODO: Perhaps replace this and the setTimeout function below with appropriate application logic/healthcheck.
+function connectToDatabase(getUrlStatus) {
 
     connection.connect();
 
-    // This should get the URL inserted from broadcast-server.js
+    // Get from the database the first mock broadcast URL
     connection.query('SELECT * FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
 
         if (error) {
@@ -34,53 +34,32 @@ function connectToDatabase() {
 
         result = results[0].url;
 
-        console.log('The status is: ', results[0].url);
+        console.log('The broadcast URL is: ', results[0].url);
 
     });
 
-
     connection.end();
 
+    setTimeout(getUrlStatus, 7000);
+}
 
-// Get the response status of the Broadcaster URL
-    // TODO: I don't know how to make a request from the server container to the database container. Need to find that.
-    request("http://broadcast-server:9001/broadcast-server-status", function (error, response, html) {
+function getBroadcastUrlStatus() {
+
+    request(result, function (error, response, html) {
 
         if(!error && response.statusCode == 200) {
             broadcastResponseStatusCode = response.statusCode;
+            console.log(`The broadcast response status code is: ${broadcastResponseStatusCode}`);
         } else {
-
             throw error;
         }
 
     });
-
 }
 
-// TODO: I need to understand this setTimeout / async feature of node. It's causing a lot of problems.
-setTimeout(connectToDatabase, 20000);
+// Wait for database to initialize and populate
+setTimeout(() => {connectToDatabase(getBroadcastUrlStatus)}, 20000);
 
-// if(!result) {
-//     result = "No result.";
-// }
-//
-// // Get the response status of the Broadcaster URL
-// let broadcastResponseStatusCode;
-//
-// request(result, function (error, response, html) {
-//
-//     if(!error && response.statusCode == 200) {
-//         broadcastResponseStatusCode = response.statusCode();
-//     } else {
-//         throw error;
-//     }
-//
-// });
-
-// For debugging only. DELETE THIS:
-if (broadcastResponseStatusCode === null) {
-    broadcastResponseStatusCode = 400;
-}
 
 // App
 const app = express();

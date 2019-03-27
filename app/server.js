@@ -44,10 +44,10 @@ function connectToDatabase() {
 
 // Get the response status of the Broadcaster URL
     // TODO: I don't know how to make a request from the server container to the database container. Need to find that.
-    request("http:/localhost:9001/broadcast-server-status", function (error, response, html) {
+    request("http://broadcast-server:9001/broadcast-server-status", function (error, response, html) {
 
         if(!error && response.statusCode == 200) {
-            broadcastResponseStatusCode = response.statusCode();
+            broadcastResponseStatusCode = response.statusCode;
         } else {
 
             throw error;
@@ -79,7 +79,7 @@ setTimeout(connectToDatabase, 20000);
 
 // For debugging only. DELETE THIS:
 if (broadcastResponseStatusCode === null) {
-    broadcastResponseStatusCode = "http://localhost:9001/broadcast-server-status";
+    broadcastResponseStatusCode = 400;
 }
 
 // App

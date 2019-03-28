@@ -16,7 +16,7 @@ var connection = mysql.createConnection({
     database : 'broadcast'
 });
 
-let result;
+let urlFromDatabase;
 let broadcastResponseStatusCode;
 
 
@@ -32,7 +32,7 @@ function connectToDatabase(getUrlStatus) {
             throw error;
         }
 
-        result = results[0].url;
+        urlFromDatabase = results[0].url;
 
         console.log('The broadcast URL is: ', results[0].url);
 
@@ -45,7 +45,7 @@ function connectToDatabase(getUrlStatus) {
 
 function getBroadcastUrlStatus() {
 
-    request(result, function (error, response, html) {
+    request(urlFromDatabase, function (error, response, html) {
 
         if(!error && response.statusCode == 200) {
             broadcastResponseStatusCode = response.statusCode;

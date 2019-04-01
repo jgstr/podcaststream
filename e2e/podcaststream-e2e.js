@@ -20,13 +20,11 @@ describe("Podcaststream Broadcaster", function() {
     });
 
     // TODO: This test runs too soon. Figure out how to delay running it. See note above before();
-    it("should return a running status", function (browser, done) {
+    it("should return a running status", function (browser) {
 
         browser
             .url('http://localhost:9000/server-status')
             .expect.element('#go-status').to.be.present;
-
-        done();
 
     });
 

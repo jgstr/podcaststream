@@ -16,12 +16,8 @@ var connection = mysql.createConnection({
     database : 'broadcast'
 });
 
-let urlFromDatabase;
-let broadcastResponseStatusCode;
 
-
-// TODO: Perhaps replace this and the setTimeout function below with appropriate application logic/healthcheck.
-function connectToDatabase(getUrlStatus) {
+function getBroadcasterUrl(getStatus) {
 
     connection.connect();
 
@@ -32,33 +28,34 @@ function connectToDatabase(getUrlStatus) {
             throw error;
         }
 
-        urlFromDatabase = results[0].url;
+        const broadcastServerUrl = results[0].url;
 
-        console.log('The broadcast URL is: ', results[0].url);
+        console.log('The broadcast URL is: ', broadcastServerUrl);
+        getStatus(broadcastServerUrl);
 
     });
 
     connection.end();
 
-    setTimeout(getUrlStatus, 7000);
 }
 
-function getBroadcastUrlStatus() {
+function getBroadcastServerStatus(sendResponse) {
 
-    request(urlFromDatabase, function (error, response, html) {
+    return function (broadCastServerUrl) {
 
-        if(!error && response.statusCode == 200) {
-            broadcastResponseStatusCode = response.statusCode;
-            console.log(`The broadcast response status code is: ${broadcastResponseStatusCode}`);
-        } else {
-            throw error;
-        }
+        request(broadCastServerUrl, function (error, response, html) {
 
-    });
+            if(!error && response.statusCode === 200) {
+                sendResponse(JSON.parse(html).status);
+            } else {
+                throw error;
+            }
+
+        });
+    }
+
 }
 
-// Wait for database to initialize and populate
-setTimeout(() => {connectToDatabase(getBroadcastUrlStatus)}, 20000);
 
 
 // App
@@ -66,9 +63,14 @@ const app = express();
 
 app.get('/server-status', (req, res) => {
 
-    res.send(`<div id=go-status>The broadcast response status code is: ${broadcastResponseStatusCode}</div>`);
+    getBroadcasterUrl(getBroadcastServerStatus((status) => {
+        res.send(`<div id=go-status>The broadcast response status code is: ${status}</div>`);
+    }));
 
 });
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
+
+// Get test to pass (using nightwatch polling)
+// Refactor later

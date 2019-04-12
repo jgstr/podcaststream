@@ -6,35 +6,50 @@ const compose = require('docker-compose');
 describe("Podcaststream Broadcaster", function() {
 
     // Sets the suite test to timeout after 'n' milliseconds.
-    this.timeout(30000);
+    // this.timeout(30000);
 
-    before("Run docker-compose up", function() {
+    before(function(browser, done) {
 
-        compose.upAll({ cwd: path.join(__dirname, '..'), log: true })
-            .then(
-                () => { console.log('Docker-compose ran.') },
-                err => { console.log('Something went wrong:', err.message)}
-            );
+        compose
+                .upAll({ cwd: path.join(__dirname, '..'), log: true,})
+                .then(
+                    () => {
+                        console.log('Docker-compose up ran.');
+                        done();
+                        },
+                    err => {
+                        console.log('Error running docker-compose:', err.message);
+                        done();
+                    }
+                );
     });
 
-    // TODO: This test runs too soon. Figure out how to delay running it. See note above before();
     it("should return a running status", function (browser) {
 
-        // The .waitForElementPresent() method is the polling feature from Nightwatch.
+        console.log("Got to 'it'");
         browser
-            .pause(6000)
+            .pause(2000)
             .url('http://localhost:9000/server-status')
             .waitForElementPresent('#go-status', 12000, 5000)
-            .expect.element('#go-status').to.be.present
-            .end();
+            .expect.element('#go-status').to.be.present;
 
 
 
     });
 
-    after("Run docker-composer down", function () {
-        compose.down().then(() => console.log('Docker-compose stopped and removed containers.'),
-            err => {console.log('Something went wrong when trying to stop containers:', err.message)});
-    })
+    // after(function(browser, done) {
+    //
+    //     return compose
+    //         .down(["--rmi all"])
+    //         .then(
+    //             () => {
+    //                 console.log('Docker-compose down ran.');
+    //                 done();
+    //             },
+    //         err => {
+    //                 console.log('Something went wrong when trying to stop containers:', err.message);
+    //                 done();
+    //             });
+    // })
 
 });

@@ -63,6 +63,8 @@ const app = express();
 
 app.get('/server-status', (req, res) => {
 
+    console.log("GET happened...");
+
     getBroadcasterUrl(getBroadcastServerStatus((status) => {
         res.send(`<div id=go-status>The broadcast response status code is: ${status}</div>`);
     }));
@@ -72,5 +74,3 @@ app.get('/server-status', (req, res) => {
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
-// Get test to pass (using nightwatch polling)
-// Refactor later

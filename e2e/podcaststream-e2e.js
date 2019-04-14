@@ -26,9 +26,11 @@ describe("Podcaststream Broadcaster", function() {
 
     it("should return a running status", function (browser) {
 
+        this.retries(4);
+
         console.log("Got to 'it'");
         browser
-            .pause(2000)
+            .pause(8000) // Waiting for fewer than 8000 ms results in a 'not found' server response
             .url('http://localhost:9000/server-status')
             .waitForElementPresent('#go-status', 12000, 5000)
             .expect.element('#go-status').to.be.present;

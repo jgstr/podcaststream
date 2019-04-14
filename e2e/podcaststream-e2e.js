@@ -39,19 +39,19 @@ describe("Podcaststream Broadcaster", function() {
 
     });
 
-    // after(function(browser, done) {
-    //
-    //     return compose
-    //         .down(["--rmi all"])
-    //         .then(
-    //             () => {
-    //                 console.log('Docker-compose down ran.');
-    //                 done();
-    //             },
-    //         err => {
-    //                 console.log('Something went wrong when trying to stop containers:', err.message);
-    //                 done();
-    //             });
-    // })
+    after(function(browser, done) {
+
+        return compose
+            .down(["--rmi all"])
+            .then(
+                () => {
+                    console.log('Docker-compose down ran.');
+                    done();
+                },
+            err => {
+                    console.log('Something went wrong when trying to stop containers:', err.message);
+                    done();
+                });
+    })
 
 });

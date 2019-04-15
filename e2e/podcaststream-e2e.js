@@ -5,8 +5,6 @@ const compose = require('docker-compose');
 
 describe("Podcaststream Broadcaster", function() {
 
-    // Sets the suite test to timeout after 'n' milliseconds.
-    // this.timeout(30000);
 
     before(function(browser, done) {
 
@@ -24,25 +22,46 @@ describe("Podcaststream Broadcaster", function() {
                 );
     });
 
+    const fetchPage = (browser, retryCount = 10) => {
+
+        return new Promise((resolve, reject) => {
+
+            if(retryCount === 0) {
+                reject(new Error("Couldn't fetch page."));
+            }
+
+            browser
+                .url('http://localhost:9000/server-status')
+                .waitForElementPresent('#go-status', 1000, 100, false)
+                .isVisible('#go-status', (visible) => {
+                    if(visible) {
+                        resolve();
+                    } else {
+                        resolve(fetchPage(browser, retryCount - 1));
+                    }
+                });
+        });
+    };
+
     it("should return a running status", function (browser) {
 
-        this.retries(4);
-
         console.log("Got to 'it'");
-        browser
-            .pause(8000) // Waiting for fewer than 8000 ms results in a 'not found' server response
-            .url('http://localhost:9000/server-status')
-            .waitForElementPresent('#go-status', 12000, 5000)
-            .expect.element('#go-status').to.be.present;
 
+        return fetchPage(browser).then(() => {
+
+            browser.expect.element('#go-status').text.to.equal("");
+
+        });
 
 
     });
 
     after(function(browser, done) {
 
-        return compose
-            .down(["--rmi all"])
+        compose
+            .down(["--rmi all"]) // This option doesn't do what it is supposed to,
+                                        // but needs to be there or else it will not
+                                        // stop the docker containers.
             .then(
                 () => {
                     console.log('Docker-compose down ran.');
@@ -52,6 +71,6 @@ describe("Podcaststream Broadcaster", function() {
                     console.log('Something went wrong when trying to stop containers:', err.message);
                     done();
                 });
-    })
+    });
 
 });

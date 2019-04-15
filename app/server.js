@@ -63,11 +63,17 @@ const app = express();
 
 app.get('/server-status', (req, res) => {
 
-    console.log("GET happened...");
+    try{
+        console.log("GET happened...");
 
-    getBroadcasterUrl(getBroadcastServerStatus((status) => {
-        res.send(`<div id=go-status>The broadcast response status code is: ${status}</div>`);
-    }));
+        getBroadcasterUrl(getBroadcastServerStatus((status) => {
+            res.send(`<div id=go-status>The broadcast response status code is: ${status}</div>`);
+        }));
+    } catch(error){
+        res.status(500);
+        res.send(`Something went wrong with server.`);
+    }
+
 
 });
 

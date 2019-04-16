@@ -35,11 +35,27 @@ describe("Podcaststream Broadcaster", function() {
                 .waitForElementPresent('#go-status', 1000, 100, false)
                 .isVisible('#go-status', (visible) => {
                     if(visible) {
+                        console.log("**** Hit 'if' from fetchPage");
                         resolve();
                     } else {
+                        console.log("*** Hit 'else' from fetchPage");
                         resolve(fetchPage(browser, retryCount - 1));
                     }
                 });
+
+            // Possible work around? .waitForElementPresent fails the test if not present
+            // see here: https://github.com/nightwatchjs/nightwatch/issues/1098
+            // browser
+            //     .url('http://localhost:9000/server-status')
+            //     .waitForElementPresent('#go-status', 1000, 100, false)
+            //     .element('#go-status', 'select', function(result){
+            //     if (result.value && result.value.ELEMENT) {
+            //         // Element is present, do the appropriate tests
+            //     } else {
+            //         // Element is not present.
+            //     }
+            // });
+
         });
     };
 
@@ -59,9 +75,7 @@ describe("Podcaststream Broadcaster", function() {
     after(function(browser, done) {
 
         compose
-            .down(["--rmi all"]) // This option doesn't do what it is supposed to,
-                                        // but needs to be there or else it will not
-                                        // stop the docker containers.
+            .down(["--rmi all"])
             .then(
                 () => {
                     console.log('Docker-compose down ran.');

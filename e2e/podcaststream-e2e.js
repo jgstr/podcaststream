@@ -5,6 +5,7 @@ const compose = require('docker-compose');
 
 describe("Podcaststream Broadcaster", function() {
 
+    this.timeout(20000);
 
     before(function(browser, done) {
 
@@ -22,7 +23,7 @@ describe("Podcaststream Broadcaster", function() {
                 );
     });
 
-    const fetchPage = (browser, retryCount = 10) => {
+    const fetchPage = (browser, retryCount = 20) => {
 
         return new Promise((resolve, reject) => {
 
@@ -34,38 +35,21 @@ describe("Podcaststream Broadcaster", function() {
                 .url('http://localhost:9000/server-status')
                 .waitForElementPresent('#go-status', 1000, 100, false)
                 .isVisible('#go-status', (visible) => {
-                    if(visible) {
-                        console.log("**** Hit 'if' from fetchPage");
+                    if(visible.status !== -1) {
                         resolve();
                     } else {
-                        console.log("*** Hit 'else' from fetchPage");
                         resolve(fetchPage(browser, retryCount - 1));
                     }
                 });
-
-            // Possible work around? .waitForElementPresent fails the test if not present
-            // see here: https://github.com/nightwatchjs/nightwatch/issues/1098
-            // browser
-            //     .url('http://localhost:9000/server-status')
-            //     .waitForElementPresent('#go-status', 1000, 100, false)
-            //     .element('#go-status', 'select', function(result){
-            //     if (result.value && result.value.ELEMENT) {
-            //         // Element is present, do the appropriate tests
-            //     } else {
-            //         // Element is not present.
-            //     }
-            // });
 
         });
     };
 
     it("should return a running status", function (browser) {
 
-        console.log("Got to 'it'");
-
         return fetchPage(browser).then(() => {
 
-            browser.expect.element('#go-status').text.to.equal("");
+            browser.expect.element('#go-status').text.to.equal("The broadcast response status code is: Up");
 
         });
 

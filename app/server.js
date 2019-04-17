@@ -7,35 +7,48 @@ const PORT = 9000;
 const HOST = '0.0.0.0';
 
 // Connect to MySQL Database
-const mysql    = require('mysql');
-var connection = mysql.createConnection({
-    host: process.env.DATABASE_HOST || '127.0.0.1',
-    port     : 3306,
-    user     : 'root',
-    password : 'root',
-    database : 'broadcast'
+const mysql = require('mysql');
+const pool = mysql.createPool({
+    host: process.env.DATABASE_HOST || 'broadcaststream_db_1',
+    port: 3306,
+    user: 'root',
+    password: 'root',
+    database: 'broadcast'
 });
 
+function getBroadcasterUrl(getStatus, handleError) {
 
-function getBroadcasterUrl(getStatus) {
-
-    connection.connect();
-
-    // Get from the database the first mock broadcast URL
-    connection.query('SELECT * FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
+    const connection = pool.getConnection((error, connection) => {
 
         if (error) {
-            throw error;
+            handleError(error);
+
+        } else {
+
+            // Get from the database the first mock broadcast URL
+            connection.query('SELECT * FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
+
+                connection.release();
+
+                if (error) {
+                    handleError(error);
+
+                } else {
+
+                    const broadcastServerUrl = results[0].url;
+
+                    console.log('The broadcast URL is: ', broadcastServerUrl);
+
+                    getStatus(broadcastServerUrl);
+
+
+                }
+
+            });
         }
-
-        const broadcastServerUrl = results[0].url;
-
-        console.log('The broadcast URL is: ', broadcastServerUrl);
-        getStatus(broadcastServerUrl);
 
     });
 
-    connection.end();
 
 }
 
@@ -45,7 +58,7 @@ function getBroadcastServerStatus(sendResponse) {
 
         request(broadCastServerUrl, function (error, response, html) {
 
-            if(!error && response.statusCode === 200) {
+            if (!error && response.statusCode === 200) {
                 sendResponse(JSON.parse(html).status);
             } else {
                 throw error;
@@ -57,22 +70,20 @@ function getBroadcastServerStatus(sendResponse) {
 }
 
 
-
 // App
 const app = express();
 
 app.get('/server-status', (req, res) => {
 
-    try{
-        console.log("GET happened...");
 
-        getBroadcasterUrl(getBroadcastServerStatus((status) => {
-            res.send(`<div id=go-status>The broadcast response status code is: ${status}</div>`);
-        }));
-    } catch(error){
+    console.log("GET happened...");
+
+    getBroadcasterUrl(getBroadcastServerStatus((status) => {
+        res.send(`<div id=go-status>The broadcast response status code is: ${status}</div>`);
+    }), (error) => {
         res.status(500);
-        res.send(`Something went wrong with server.`);
-    }
+        res.send(`Something went wrong with server: ${error}`);
+    });
 
 
 });

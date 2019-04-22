@@ -17,6 +17,8 @@ const pool = mysql.createPool({
 });
 
 function getBroadcasterUrl(getStatus, handleError) {
+    // Will either resolvej the promise with Url
+    // or reject with err.
 
     const connection = pool.getConnection((error, connection) => {
 
@@ -53,15 +55,18 @@ function getBroadcasterUrl(getStatus, handleError) {
 }
 
 function getBroadcastServerStatus(sendResponse) {
+    // No longer gets sendResponse
+    // No longer needs inner function
+    // Simple function that gets a Url and returns a Promise
 
     return function (broadCastServerUrl) {
 
         request(broadCastServerUrl, function (error, response, html) {
 
             if (!error && response.statusCode === 200) {
-                sendResponse(JSON.parse(html).status);
+                sendResponse(JSON.parse(html).status);  // resolve this or..
             } else {
-                throw error;
+                throw error;                              // reject with err
             }
 
         });
@@ -78,6 +83,9 @@ app.get('/server-status', (req, res) => {
 
     console.log("GET happened...");
 
+    // chain .then here.
+    // don't forget .catch with status 500
+
     getBroadcasterUrl(getBroadcastServerStatus((status) => {
         res.send(`<div id=go-status>The broadcast response status code is: ${status}</div>`);
     }), (error) => {
@@ -91,3 +99,6 @@ app.get('/server-status', (req, res) => {
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
 
+// HOMEWORK:
+// Research more Promises
+//

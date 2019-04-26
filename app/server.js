@@ -41,7 +41,7 @@ const getBroadcasterUrl = () => {
 
                 // Error? Same return as above.
                 if (error) {
-                    handleError(error);
+                    reject(error);
 
                 } else {
 

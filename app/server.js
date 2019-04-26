@@ -19,10 +19,12 @@ const pool = mysql.createPool({
 
 /* To be refactored to Promises */
 
-const getBroadcasterUrl = new Promise( (resolve, reject) => {
+const getBroadcasterUrl = () => {
 
     // Will either resolve the promise with Url
     // or reject with err.
+
+    return new Promise( (resolve, reject) => {
 
     const connection = pool.getConnection((error, connection) => {
 
@@ -60,6 +62,8 @@ const getBroadcasterUrl = new Promise( (resolve, reject) => {
 
 });
 
+};
+
 
 function getBroadcastServerStatus(broadcastUrl) {
     // No longer gets sendResponse
@@ -68,7 +72,7 @@ function getBroadcastServerStatus(broadcastUrl) {
 
     return new Promise ((resolve, reject) => {
 
-        request(broadCastServerUrl, function (error, response, html) {
+        request(broadcastUrl, function (error, response, html) {
 
             if (!error && response.statusCode === 200) {
                 resolve(JSON.parse(html).status);  // resolve (pass this value) "status"
@@ -103,7 +107,7 @@ app.get('/server-status', (req, res) => {
         })
         .catch( (error) => {
             res.status(500);
-            res.send(`Something went wrong with server: ${error}`);
+            res.send(`Something went wrong with the server: ${error}`);
         });
 
 });

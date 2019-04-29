@@ -17,35 +17,26 @@ const pool = mysql.createPool({
 });
 
 
-/* To be refactored to Promises */
-
 const getBroadcasterUrl = () => {
-
-    // Will either resolve the promise with Url
-    // or reject with err.
 
     return new Promise( (resolve, reject) => {
 
     const connection = pool.getConnection((error, connection) => {
 
-        // Error? Promise Obj is returned with `error` as the accessible value for .catch().
         if (error) {
             reject(error);
 
         } else {
 
-            // Get from the database the first mock broadcast URL
             connection.query('SELECT * FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
 
                 connection.release();
 
-                // Error? Same return as above.
                 if (error) {
                     reject(error);
 
                 } else {
 
-                    // No error? Promise Obj is returned with broadcastServerUrl as the value for .then().
                     const broadcastServerUrl = results[0].url;
 
                     console.log('The broadcast URL is: ', broadcastServerUrl);
@@ -66,18 +57,15 @@ const getBroadcasterUrl = () => {
 
 
 function getBroadcastServerStatus(broadcastUrl) {
-    // No longer gets sendResponse
-    // No longer needs inner function
-    // Simple function that gets a Url and returns a Promise
 
     return new Promise ((resolve, reject) => {
 
         request(broadcastUrl, function (error, response, html) {
 
             if (!error && response.statusCode === 200) {
-                resolve(JSON.parse(html).status);  // resolve (pass this value) "status"
+                resolve(JSON.parse(html).status);
             } else {
-                reject(error);                     // reject with err
+                reject(error);
             }
 
         });
@@ -89,17 +77,12 @@ function getBroadcastServerStatus(broadcastUrl) {
 
 const app = express();
 
+app.use(express.static('web-app/build'));
+
 app.get('/server-status', (req, res) => {
-
-
-    console.log("GET happened...");
-
-    // chain .then here.
-    // don't forget .catch with status 500
 
     getBroadcasterUrl()
         .then( (broadcastUrl) => {
-            // This returns a new Promise object AND the status value
             return getBroadcastServerStatus(broadcastUrl);
         })
         .then( (status) => {
@@ -111,6 +94,9 @@ app.get('/server-status', (req, res) => {
         });
 
 });
+
+
+
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

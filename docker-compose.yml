@@ -11,6 +11,10 @@ services:
       - DATABASE_HOST=db
     links:
       - db
+  web-app:
+    build: ./web-app
+    ports:
+      - 9002:9002
   broadcast-server:
     build: ./broadcast-server
     ports:

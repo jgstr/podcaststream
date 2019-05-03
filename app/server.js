@@ -77,8 +77,6 @@ function getBroadcastServerStatus(broadcastUrl) {
 
 const app = express();
 
-app.use(express.static('web-app/build'));
-
 app.get('/server-status', (req, res) => {
 
     getBroadcasterUrl()

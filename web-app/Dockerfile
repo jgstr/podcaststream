@@ -5,8 +5,6 @@ WORKDIR /usr/src/app
 
 COPY build/ ./
 
-RUN npm install
+RUN npm install -g serve
 
-CMD [ "npm", "install -g serve" ]
-
-CMD [ "serve", "-s build -l 9002" ]
+CMD [ "serve", "-s build -l 9000" ]

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha --require @babel/register",
-    "e2e": "nightwatch"
+    "e2e": "nightwatch",
+    "build-server": "docker build -t podcaststream_app ./app"
   },
   "repository": {
     "type": "git",

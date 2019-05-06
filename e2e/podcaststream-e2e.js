@@ -32,7 +32,7 @@ describe("Podcaststream Broadcaster", function() {
             }
 
             browser
-                .url('http://localhost:9002/')
+                .url('http://localhost:5000/')
                 .waitForElementPresent('#go-status', 1000, 100, false)
                 .isVisible('#go-status', (visible) => {
                     if(visible.status !== -1) {

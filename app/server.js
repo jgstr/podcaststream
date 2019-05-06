@@ -84,7 +84,9 @@ app.get('/server-status', (req, res) => {
             return getBroadcastServerStatus(broadcastUrl);
         })
         .then( (status) => {
-            res.send(`<div id=go-status>The broadcast response status code is: ${status}</div>`);
+            res.send({
+                status
+            });
         })
         .catch( (error) => {
             res.status(500);

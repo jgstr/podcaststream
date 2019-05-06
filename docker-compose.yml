@@ -14,7 +14,7 @@ services:
   web-app:
     build: ./web-app
     ports:
-      - 9002:9002
+      - 5000:5000
   broadcast-server:
     build: ./broadcast-server
     ports:

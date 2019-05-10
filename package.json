@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --require @babel/register",
     "e2e": "nightwatch",
-    "build-server": "docker build -t podcaststream_app ./app"
+    "build-server": "docker build -t podcaststream_app ./app",
+    "build-web-app": "cd web-app; npm run build && cd - && docker build -t podcaststream_web-app ./web-app"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/jgstr/podcaststream#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
     "express": "^4.16.4",

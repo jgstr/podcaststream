@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Things from './Components/Things.js';
 
 class App extends React.Component {
 
@@ -30,6 +31,7 @@ class App extends React.Component {
             Learn React
           </a>
         </header>
+        <Things />
       </div>
     );
   }

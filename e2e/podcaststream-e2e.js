@@ -5,10 +5,11 @@ const compose = require('docker-compose');
 
 describe("Podcaststream Broadcaster", function() {
 
+    const streamerStatusSelector = '.streamer-status';
+
     this.timeout(20000);
 
     before(function(browser, done) {
-
         compose
                 .upAll({ cwd: path.join(__dirname, '..'), log: true,})
                 .then(
@@ -17,24 +18,26 @@ describe("Podcaststream Broadcaster", function() {
                         done();
                         },
                     err => {
-                        console.log('Error running docker-compose:', err.message);
+                        console.log('Error running docker-compose up:', err.message);
                         done();
                     }
                 );
+
     });
 
     const fetchPage = (browser, retryCount = 20) => {
 
         return new Promise((resolve, reject) => {
-
             if(retryCount === 0) {
                 reject(new Error("Couldn't fetch page."));
+
+
             }
 
             browser
                 .url('http://localhost:5000/')
-                .waitForElementPresent('#go-status', 1000, 100, false)
-                .isVisible('#go-status', (visible) => {
+                .waitForElementPresent(streamerStatusSelector, 1000, 100, false)
+                .isVisible(streamerStatusSelector, (visible) => {
                     if(visible.status !== -1) {
                         resolve();
                     } else {
@@ -49,7 +52,7 @@ describe("Podcaststream Broadcaster", function() {
 
         return fetchPage(browser).then(() => {
 
-            browser.expect.element('#go-status').text.to.equal("Up");
+            browser.expect.element(streamerStatusSelector).text.to.equal("Up").after(30000);
 
         });
 

@@ -1,11 +1,15 @@
 import React from 'react';
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 
-export default class Things extends React.Component {
+axiosRetry(axios, {retryDelay: axiosRetry.exponentialDelay, retries: 20});
+
+export default class StreamerStatus extends React.Component {
     state = {
         status: ""
     };
 
+    // TODO This needs to move elsewhere
     componentDidMount() {
 
         console.log("Going to get server status");
@@ -14,11 +18,12 @@ export default class Things extends React.Component {
             console.log(res);
             this.setState({status: res.data.status});
         });
+
     }
 
     render() {
         return (
-            <span id="go-status">
+            <span className="streamer-status">
                 {this.state.status}
             </span>
         )

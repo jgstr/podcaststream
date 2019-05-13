@@ -49,7 +49,7 @@ describe("Podcaststream Broadcaster", function() {
 
         return fetchPage(browser).then(() => {
 
-            browser.expect.element('#go-status').text.to.equal("The broadcast response status code is: Up");
+            browser.expect.element('#go-status').text.to.equal("Up");
 
         });
 

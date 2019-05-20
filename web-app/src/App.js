@@ -1,24 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import StreamerStatus from './Components/StreamerStatus.js';
+import axios from "axios";
+import axiosRetry from 'axios-retry';
+
+axiosRetry(axios, {retryDelay: axiosRetry.exponentialDelay, retries: 20});
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = {status: ""};
   }
 
   componentDidMount() {
-    // Use axios to send a request to the server on /server-status.
+    axios.get(`http://localhost:9000/server-status`).then( res => {
+      console.log(res);
+      this.setState({status: res.data.status});
+    });
+
   }
 
   render(){
 
     return (
       <div className="App">
-        <StreamerStatus />
-        <StreamerStatus />
+        <StreamerStatus status={this.state.status}/>
       </div>
     );
   }

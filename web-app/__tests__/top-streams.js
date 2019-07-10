@@ -7,6 +7,8 @@ describe("List of Top Streams", () => {
         // need fake browser (JS DOM).
 
         // How to write tests with CreateReact App?? Look it up on their website, probably via Jest.
+        // Get one to work.
+        // https://facebook.github.io/create-react-app/docs/running-tests
 
     })
 });

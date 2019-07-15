@@ -8,6 +8,3 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('displays status: Up', () => {
-
-})

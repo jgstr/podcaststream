@@ -1,7 +1,13 @@
 import React from 'react';
 
 export const TopStreams = ({streams}) => {
-    // 'streams' comes from TopStreams rendering.
-    // must traverse array of 'streams'
-    return null;
+
+    // must traverse array of 'streams.' But how?
+    return (
+        <span className="top-stream">
+        </span>
+    )
+
+
+
 };

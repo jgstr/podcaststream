@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {expect} from 'chai';
 import {TopStreams} from './TopStreams';
+
+import {configure, shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+configure({ adapter: new Adapter() });
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -8,11 +13,19 @@ it('renders without crashing', () => {
     ReactDOM.unmountComponentAtNode(div);
 });
 
-it('renders a list of streams', () => {
-    const div = document.createElement('div');
-    // Use enzyme function here instead
-    ReactDOM.render(<TopStreams streams={['name1', 'name2']}/>, div);
-    // Use assertion/checker here.
-    // at least get test to fail correctly
-    
+test('it renders a list of streams', () => {
+
+    // I don't understand the render() method -- and specifically,
+    // why we render in a test. Should not we render from TopStreams.js
+    // instead? And then test how TopStreams renders?
+
+    // const div = document.createElement('div');
+    // ReactDOM.render(<TopStreams streams={['name1', 'name2']}/>, div);
+
+    const topStreams = shallow(<TopStreams streams={['name1', 'name2']}/>);
+
+    // What am I testing for? And I'm using chai, but not sure if I'm supposed to...
+    expect(topStreams).to.contain('');
+
+
 });

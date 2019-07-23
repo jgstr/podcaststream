@@ -17,10 +17,8 @@ test('it renders a list of streams', () => {
 
     // Shallow creates a special 'wrapper' -- read more about this.
     const topStreams = shallow(<TopStreams streams={['name1', 'name2']}/>);
-
-    expect(topStreams.find('section#top-streams span.stream')).to.have.lengthOf(2);
-
-    // TODO finish: check that each stream contains the correct string. SHOULD FAIL FIRST!!!
+    console.log("topStreams: " + topStreams);
+    expect(topStreams.find().text).to.equal('');
 
 
 });

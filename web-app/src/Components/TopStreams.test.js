@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {expect} from 'chai';
+// import {expect} from 'chai';  // might be in Jest
 import {TopStreams} from './TopStreams';
 
 import {configure, shallow} from 'enzyme';
@@ -20,11 +20,15 @@ test('it renders a list of streams', () => {
     // TODO Something might be wrong with the way the values pass into 'streams'?
     const topStreams = shallow(<TopStreams streams={['name1', 'name2']}/>);
     console.log("topStreams: " + topStreams);
-    expect(topStreams.find('key="name1"').text).to.equal('name1');
+    expect(topStreams.find('section#top-streams span.stream').map( (node) => node.text() )).toEqual(['name1', 'name2']);
 
     // TODO I think something is wrong with topStreams. The console returns '{}'.
     // I think TopStreams.js renders the code incorrectly. But I don't know how to test.
     // expect(topStreams.find('#top-streams')).to.have.lengthOf(2);
 
+    // TODO 7/26 clean up:
+    //  1. list of names needs to be refactored for non-duplication
+    //  2. Clean up other stuff like comments.
+    //  Next: Connect TopStreams (ie, test it)
 
 });

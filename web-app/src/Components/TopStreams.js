@@ -2,9 +2,6 @@ import React from 'react';
 
 export const TopStreams = ({streams}) => {
 
-    // must traverse array of 'streams.' But how?
-    // Alternative to for is .map()
-
     return (
         // Add to notes on React.
         // 1. cannot return arrays as the main returned element, ie, one wrapper tag

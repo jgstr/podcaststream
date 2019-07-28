@@ -8,4 +8,7 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-// TODO test for topstreams rendering here.
+it('finds the TopStreams component', () => {
+  // TODO 7/29, test for topstreams rendering here.
+
+});

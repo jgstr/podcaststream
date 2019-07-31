@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import StreamerStatus from './Components/StreamerStatus.js';
+import {TopStreams} from "./Components/TopStreams";
 import axios from "axios";
 import axiosRetry from 'axios-retry';
 
@@ -26,6 +27,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <StreamerStatus status={this.state.status}/>
+        <TopStreams />
       </div>
     );
   }

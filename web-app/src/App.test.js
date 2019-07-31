@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import {TopStreams} from './Components/TopStreams';
+
+import {configure, shallow} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+configure({ adapter: new Adapter() });
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -8,7 +13,9 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('finds the TopStreams component', () => {
-  // TODO 7/29, test for topstreams rendering here.
+it('renders the TopStreams component', () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.find('TopStreams')).to.have.lengthOf(1); // .find() returns 'undefined'
+  // during test.
 
 });

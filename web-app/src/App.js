@@ -22,7 +22,7 @@ class App extends React.Component {
 
   }
 
-  render(){
+  render(){ // this needs access to responses from get() requests. Look at this.state
 
     return (
       <div className="App">

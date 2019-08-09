@@ -16,6 +16,7 @@ it('renders without crashing', () => {
 });
 
 it('renders the TopStreams component', () => {
+
     const scope = nock('http://localhost:9000')
         .get('/streams/top')
         .reply(200, {
@@ -27,7 +28,7 @@ it('renders the TopStreams component', () => {
         });
 
     const wrapper = shallow(<App />);
-    
+
     expect(wrapper
             .find(TopStreams)
             .props()

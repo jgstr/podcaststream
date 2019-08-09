@@ -15,16 +15,21 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+
     axios.get(`http://localhost:9000/server-status`).then( res => {
-      console.log('Aaron\'s log: ' + res);
       this.setState({status: res.data.status});
     });
 
   // Step 2 - Use axios.get() to call the /streams/top URL and receive the fake
   // data from nock.
 
-  // Step 2.B - Save this data in some kind of state, like in the code above,
-  // and add it to the TopStreams component below, just like in StreamerStatus.
+  // I'm confused about this: Don't we need nock here to mock the server? Not in App.test?
+
+  // Pretend const scope = nock( ... ) goes here and mocks the app server.
+
+    axious.get(`http://localhost:9000/streams/top`).then( res => {
+      // something similar to `this.state = {streams: res}` here?
+    });
 
   // This is also the part Nimrod said to watch out for. componentDidMount will
   // cause troubles involving 1) re-rendering or 2) asynchronous code (the /streams/
@@ -36,7 +41,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <StreamerStatus status={this.state.status}/>
-        <TopStreams streams={['name1', 'name2']}/>
+        <TopStreams streams={['name1', 'name2']}/> <!-- something like {this.state.streams} ?-->
       </div>
     );
   }

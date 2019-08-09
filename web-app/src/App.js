@@ -16,10 +16,19 @@ class App extends React.Component {
 
   componentDidMount() {
     axios.get(`http://localhost:9000/server-status`).then( res => {
-      console.log(res);
+      console.log('Aaron\'s log: ' + res);
       this.setState({status: res.data.status});
     });
 
+  // Step 2 - Use axios.get() to call the /streams/top URL and receive the fake
+  // data from nock.
+
+  // Step 2.B - Save this data in some kind of state, like in the code above,
+  // and add it to the TopStreams component below, just like in StreamerStatus.
+
+  // This is also the part Nimrod said to watch out for. componentDidMount will
+  // cause troubles involving 1) re-rendering or 2) asynchronous code (the /streams/
+  // request).
   }
 
   render(){ // this needs access to responses from get() requests. Look at this.state

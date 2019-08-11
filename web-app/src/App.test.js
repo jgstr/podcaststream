@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {TopStreams} from './Components/TopStreams';
 
-import {configure, shallow} from 'enzyme';
+import {configure, shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
@@ -15,19 +15,30 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('renders the TopStreams component', () => {
+it('renders the TopStreams component', async () => {
 
-    const scope = nock('http://localhost:9000')
+    nock('http://localhost:9000')
+        .log( console.log )
+        .defaultReplyHeaders({"access-control-allow-origin": "*"})
         .get('/streams/top')
+        .times(3)
         .reply(200, {
             streams: [{
-                name: 'stream1'
+                name: 'name1'
             }, {
-                name: 'stream2'
+                name: 'name2'
             }]
+        })
+        .get('/server-status')
+        .times(3)
+        .reply(200, {
+            status: "Up"
         });
 
+
+
     const wrapper = shallow(<App />);
+    await wrapper.instance().componentDidMount();
 
     expect(wrapper
             .find(TopStreams)
@@ -37,12 +48,6 @@ it('renders the TopStreams component', () => {
 
 });
 
-// TODO: Next for after 8/4:
-// 1. Find how to 'expect' values of attributes on a component.
-
-// 2. Then, consider asynchronous complications with React components.
-// Look at the axious get request in App.js.
-// Start with the Jest asynchronous documentation. Read that thoroughly.
 
 
 

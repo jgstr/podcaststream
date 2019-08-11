@@ -5,17 +5,10 @@ export const TopStreams = ({streams}) => {
     return (
 
         <section id="top-streams">
-            { streams && streams.map(name => (
-                <span key={name} className="stream">{name}</span>
+            { streams && streams.map(stream => (
+                <span key={stream.name} className="stream">{stream.name}</span>
             )) }
-        </section>
-
-//         Example:
-//         <section id="top-streams">
-//         { streams && streams.map(streams => (
-//             <span key={name} className="stream">{streams.name}</span>
-//         )) }
-//          </section>
+         </section>
 
     )
 
@@ -27,3 +20,10 @@ export const TopStreams = ({streams}) => {
 //     { 'name': 'name1', shows: [{name: 'show name 1', ...}] },
 //     ...
 //  ]
+
+// Original code (8/11/2019):
+// <section id="top-streams">
+//    { streams && streams.map(name => (
+//        <span key={name} className="stream">{name}</span>
+//    )) }
+// </section>

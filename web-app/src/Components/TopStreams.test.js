@@ -12,9 +12,25 @@ it('renders without crashing', () => {
     ReactDOM.unmountComponentAtNode(div);
 });
 
-it('renders a list of streams', () => {
-    const streamNames = ['name1', 'name2'];
-    const topStreams = shallow(<TopStreams streams={streamNames}/>);
-    expect( topStreams.find('section#top-streams span.stream').map((node) => node.text()) )
-                     .toEqual(streamNames);
+// Original test (8/11/2019):
+
+// it('renders a list of streams', () => {
+//     const streamNames = ['name1', 'name2'];
+//     const topStreams = shallow(<TopStreams streams={streamNames}/>);
+//     expect( topStreams.find('section#top-streams span.stream').map((node) => node.text()) )
+//                      .toEqual(streamNames);
+// });
+
+it('renders a list of stream objects', () => {
+
+    const streamList = [
+                            {name: 'name1'},
+                            {name: 'name2'}
+                         ];
+
+    const topStreams = shallow(<TopStreams streams={streamList}/>);
+
+    expect( topStreams.find('section#top-streams span.stream') // Returns React wrapper of nodes
+                      .map( node => node.text() ))
+                      .toEqual(streamList); // this needs to test Objects, not strings??
 });

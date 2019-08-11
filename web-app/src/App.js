@@ -35,7 +35,7 @@ class App extends React.Component {
         return (
             <div className="App">
                 <StreamerStatus status={this.state.status}/>
-                <TopStreams streams={this.state.streams.map(stream => stream.name )}/>
+                <TopStreams streams={this.state.streams}/>
             </div>
         );
     }

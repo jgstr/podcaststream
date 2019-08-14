@@ -30,7 +30,7 @@ it('renders a list of stream objects', () => {
 
     const topStreams = shallow(<TopStreams streams={streamList}/>);
 
-    expect( topStreams.find('section#top-streams span.stream') // Returns React wrapper of nodes
+    expect( topStreams.find('section#top-streams span.stream') // Returns React/Shallow wrapper of nodes
                       .map( node => node.text() ))
                       .toEqual(streamList); // this needs to test Objects, not strings??
 });

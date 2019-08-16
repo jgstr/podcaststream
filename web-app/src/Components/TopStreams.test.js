@@ -12,15 +12,6 @@ it('renders without crashing', () => {
     ReactDOM.unmountComponentAtNode(div);
 });
 
-// Original test (8/11/2019):
-
-// it('renders a list of streams', () => {
-//     const streamNames = ['name1', 'name2'];
-//     const topStreams = shallow(<TopStreams streams={streamNames}/>);
-//     expect( topStreams.find('section#top-streams span.stream').map((node) => node.text()) )
-//                      .toEqual(streamNames);
-// });
-
 it('renders a list of stream objects', () => {
 
     const streamList = [
@@ -30,7 +21,7 @@ it('renders a list of stream objects', () => {
 
     const topStreams = shallow(<TopStreams streams={streamList}/>);
 
-    expect( topStreams.find('section#top-streams span.stream') // Returns React/Shallow wrapper of nodes
+    expect( topStreams.find('section#top-streams span.stream')
                       .map( node => node.text() ))
-                      .toEqual(streamList); // this needs to test Objects, not strings??
+                      .toEqual( streamList.map( stream => stream.name) );
 });

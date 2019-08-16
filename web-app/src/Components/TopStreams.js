@@ -5,25 +5,27 @@ export const TopStreams = ({streams}) => {
     return (
 
         <section id="top-streams">
-            { streams && streams.map(stream => (
-                <span key={stream.name} className="stream">{stream.name}</span>
-            )) }
-         </section>
+            {streams && streams.map(stream => (
+                <div>
+                    <span key={stream.name} className="stream">{stream.name}</span>
+                    <ol>
+                        {stream.shows && stream.shows.map(
+                            show => <li className="streamShows">{show}</li>)
+                        }
+                    </ol>
 
-    )
+                </div>
+
+            ))}
+        </section>
+
+    );
 
 };
 
-// For next time:
-//  Assume that streams is no longer a ['name1', 'name2] but instead is a list of objects:
-//  [
-//     { 'name': 'name1', shows: [{name: 'show name 1', ...}] },
-//     ...
-//  ]
 
-// Original code (8/11/2019):
 // <section id="top-streams">
-//    { streams && streams.map(name => (
-//        <span key={name} className="stream">{name}</span>
-//    )) }
+//     { streams && streams.map(stream => (
+//         <span key={stream.name} className="stream">{stream.name}</span>
+//     )) }
 // </section>

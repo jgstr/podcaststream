@@ -10,7 +10,7 @@ export const TopStreams = ({streams}) => {
                     <span key={stream.name} className="stream">{stream.name}</span>
                     <ol>
                         {stream.shows && stream.shows.map(
-                            show => <li className="streamShows">{show}</li>)
+                            show => <li key={show} className="streamShows">{show}</li>)
                         }
                     </ol>
 
@@ -22,10 +22,3 @@ export const TopStreams = ({streams}) => {
     );
 
 };
-
-
-// <section id="top-streams">
-//     { streams && streams.map(stream => (
-//         <span key={stream.name} className="stream">{stream.name}</span>
-//     )) }
-// </section>

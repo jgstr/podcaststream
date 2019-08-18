@@ -13,27 +13,32 @@ it('renders without crashing', () => {
     ReactDOM.unmountComponentAtNode(div);
 });
 
+
+function renderTopStreams(streamList) {
+    return shallow(<TopStreams streams={streamList}/>);
+}
+
+
+function expectTextInElements(topStreams, selector, textList) {
+    expect(topStreams.find(selector).map(node => node.text())).toEqual(textList);
+}
+
 it('renders a list of stream objects', () => {
 
-    const streamList = [
+    const topStreams = renderTopStreams([
         {name: 'name1'},
         {name: 'name2'}
-    ];
+    ]);
 
-    const topStreams = shallow(<TopStreams streams={streamList}/>);
-
-    expect(topStreams.find('section#top-streams span.stream').map(node => node.text()))
-        .toEqual(streamList.map(stream => stream.name));
+    expectTextInElements(topStreams, 'section#top-streams span.stream', ['name1', 'name2']);
 });
 
 it('readers a list of shows', () => {
 
-    const streamList = [
-        {name: 'name1', shows: ['show1', 'show2', 'show3']} // Note: does not yet pass when adding second stream object.
-    ];
+    const shows = ['show1', 'show2', 'show3'];
+    const topStreams = renderTopStreams([
+        {name: 'name1', shows} // Note: does not yet pass when adding second stream object.
+    ]);
 
-    const topStreams = shallow(<TopStreams streams={streamList}/>);
-
-    expect(topStreams.find('section#top-streams li.streamShows').map(node => node.text()))
-        .toEqual(['show1', 'show2', 'show3']);
+    expectTextInElements(topStreams, 'section#top-streams li.streamShows', shows);
 });

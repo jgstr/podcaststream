@@ -19,7 +19,6 @@ it('renders without crashing', () => {
 it('renders the TopStreams component', async () => {
 
     nock('http://localhost:9000')
-        .log(console.log)
         .defaultReplyHeaders({"access-control-allow-origin": "*"})
         .get('/streams/top')
         .times(3)

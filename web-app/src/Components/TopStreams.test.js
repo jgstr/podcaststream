@@ -7,21 +7,13 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({adapter: new Adapter()});
 
+import {renderTopStreams, expectTextInElements} from "../utils/testUtilities";
+
 it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<TopStreams/>, div);
     ReactDOM.unmountComponentAtNode(div);
 });
-
-
-function renderTopStreams(streamList) {
-    return shallow(<TopStreams streams={streamList}/>);
-}
-
-
-function expectTextInElements(topStreams, selector, textList) {
-    expect(topStreams.find(selector).map(node => node.text())).toEqual(textList);
-}
 
 it('renders a list of stream objects', () => {
 

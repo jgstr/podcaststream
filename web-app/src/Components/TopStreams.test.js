@@ -29,8 +29,8 @@ it('readers a list of shows', () => {
 
     const shows = ['show1', 'show2', 'show3'];
     const topStreams = renderTopStreams([
-        {name: 'name1', shows} // Note: does not yet pass when adding second stream object.
+        {name: 'name1', shows}
     ]);
 
-    expectTextInElements(topStreams, 'section#top-streams li.streamShows', shows);
+    expectTextInElements(topStreams, 'section#top-streams div:first-child li.streamShows', shows);
 });

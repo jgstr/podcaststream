@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {TopStreams} from './Components/TopStreams';
+import {Player} from './Components/Player';
 
 import {configure, shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -51,6 +52,16 @@ it('renders the TopStreams component', async () => {
         }
     ]);
 
+});
+
+it('renders the Player component', () => { // Review async/await. Do I need it here?
+
+    const wrapper = shallow(<App/>);
+
+    expect(wrapper
+        .find(Player)
+        .text()
+    ).toEqual('Player');
 });
 
 

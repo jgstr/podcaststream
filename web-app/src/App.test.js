@@ -58,10 +58,7 @@ it('renders the Player component', () => { // Review async/await. Do I need it h
 
     const wrapper = shallow(<App/>);
 
-    expect(wrapper
-        .find(Player)
-        .text()
-    ).toEqual('Player');
+    expect(wrapper.find(Player)).toHaveLength(1);
 });
 
 

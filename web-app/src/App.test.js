@@ -38,7 +38,7 @@ it('renders the TopStreams component', async () => {
 
 
     const wrapper = shallow(<App/>);
-    await wrapper.instance().componentDidMount(); // Await and async are confusing.
+    await wrapper.instance().componentDidMount();
 
     expect(wrapper
         .find(TopStreams)
@@ -54,7 +54,7 @@ it('renders the TopStreams component', async () => {
 
 });
 
-it('renders the Player component', () => { // Review async/await. Do I need it here?
+it('renders the Player component', () => {
 
     const wrapper = shallow(<App/>);
 

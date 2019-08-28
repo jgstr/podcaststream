@@ -25,7 +25,7 @@ it('renders a list of stream objects', () => {
     expectTextInElements(topStreams, 'section#top-streams span.stream', ['name1', 'name2']);
 });
 
-it('readers a list of shows', () => {
+it('renders a list of shows', () => {
 
     const shows = ['show1', 'show2', 'show3'];
     const topStreams = renderTopStreams([

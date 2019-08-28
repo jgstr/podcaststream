@@ -17,10 +17,10 @@ export const renderTopStreams = streamList => {
 
 /**
  *
- * @param topStreams
+ * @param component
  * @param selector
  * @param textList
  */
-export const expectTextInElements = (topStreams, selector, textList) => {
-    expect(topStreams.find(selector).map(node => node.text())).toEqual(textList);
+export const expectTextInElements = (component, selector, textList) => {
+    expect(component.find(selector).map(node => node.text())).toEqual(textList);
 }

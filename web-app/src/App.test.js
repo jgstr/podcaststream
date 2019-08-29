@@ -54,9 +54,35 @@ it('renders the TopStreams component', async () => {
 
 });
 
-it('renders the Player component', () => {
+it('renders the Player component', async () => {
+
+    nock('http://localhost:9000')
+        .defaultReplyHeaders({"access-control-allow-origin": "*"})
+        .get('/streams/top')
+        .times(3)
+        .reply(200, {
+            streams: [{
+                name: 'name1'
+            }, {
+                name: 'name2'
+            }]
+        })
+        .get('/server-status')
+        .times(3)
+        .reply(200, {
+            status: "Up"
+        })
+        .get('/streams/1234')
+        .times(3)
+        .reply(200, {
+            playerStream: {
+                name: 'Name 1', // TODO: Figure out how to feed the player/stream properties into the Player Component
+                length: '2200'
+            }
+        });
 
     const wrapper = shallow(<App/>);
+    await wrapper.instance().componentDidMount();
 
     expect(wrapper.find(Player)).toHaveLength(1);
 });

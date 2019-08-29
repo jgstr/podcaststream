@@ -26,6 +26,9 @@ class App extends React.Component {
             }),
             axios.get(`http://localhost:9000/streams/top`).then(res => {
                 this.setState({streams: res.data.streams});
+            }),
+            axios.get(`http://localhost:9000/streams/1234`).then( res => {
+                this.setState({playerStream: res.data.playerStream})
             })
         ]);
 
@@ -37,7 +40,8 @@ class App extends React.Component {
             <div className="App">
                 <StreamerStatus status={this.state.status}/>
                 <TopStreams streams={this.state.streams}/>
-                <Player streamProperties={{name: "Name 1", length: "2200"}}/>
+                {/*<Player streamProperties={{name: "Name 1", length: "2200"}}/>*/}
+                <Player streamProperties={this.state.playerStream}/>
             </div>
         );
     }

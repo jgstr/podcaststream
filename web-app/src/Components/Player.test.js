@@ -10,7 +10,7 @@ import {Player} from "./Player";
 
 it('should renders an Object with stream values', () => {
 
-    const player = shallow(<Player streamProperties={{name: 'Name 1', length: '2200'}}/>);
+    const player = shallow(<Player playerStream={{name: 'Name 1', length: '2200'}}/>);
     expectTextInElements(player, '.streamProperty', ['Name 1', '2200']);
 })
 

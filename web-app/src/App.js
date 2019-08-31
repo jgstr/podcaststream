@@ -41,7 +41,7 @@ class App extends React.Component {
                 <StreamerStatus status={this.state.status}/>
                 <TopStreams streams={this.state.streams}/>
                 {/*<Player streamProperties={{name: "Name 1", length: "2200"}}/>*/}
-                <Player streamProperties={this.state.playerStream}/>
+                <Player playerStream={this.state.playerStream}/>
             </div>
         );
     }

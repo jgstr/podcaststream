@@ -21,23 +21,15 @@ it('renders the TopStreams component', async () => {
 
     nock('http://localhost:9000')
         .defaultReplyHeaders({"access-control-allow-origin": "*"})
-        .get('/streams/top')
+        .get('/get-all')
         .times(3)
-        .reply(200, {
+        .reply(200,{
+            status: "Up",
             streams: [{
                 name: 'name1'
             }, {
                 name: 'name2'
-            }]
-        })
-        .get('/server-status')
-        .times(3)
-        .reply(200, {
-            status: "Up"
-        })
-        .get('/streams/1234') // TODO: Refactor nock. Currently, each test needs ALL GET requests
-        .times(3)             // which encumbers the test with redundancy.
-        .reply(200, {
+            }],
             playerStream: {
                 name: 'Name 1',
                 length: '2200'
@@ -66,23 +58,15 @@ it('renders the Player component', async () => {
 
     nock('http://localhost:9000')
         .defaultReplyHeaders({"access-control-allow-origin": "*"})
-        .get('/streams/top')
+        .get('/get-all')
         .times(3)
-        .reply(200, {
+        .reply(200,{
+            status: "Up",
             streams: [{
                 name: 'name1'
             }, {
                 name: 'name2'
-            }]
-        })
-        .get('/server-status')
-        .times(3)
-        .reply(200, {
-            status: "Up"
-        })
-        .get('/streams/1234')
-        .times(3)
-        .reply(200, {
+            }],
             playerStream: {
                 name: 'Name 1',
                 length: '2200'

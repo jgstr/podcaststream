@@ -21,13 +21,9 @@ class App extends React.Component {
     componentDidMount() {
 
         return Promise.all([
-            axios.get(`http://localhost:9000/server-status`).then(res => {
+            axios.get(`http://localhost:9000/get-all`).then(res => {
                 this.setState({status: res.data.status});
-            }),
-            axios.get(`http://localhost:9000/streams/top`).then(res => {
                 this.setState({streams: res.data.streams});
-            }),
-            axios.get(`http://localhost:9000/streams/1234`).then( res => {
                 this.setState({playerStream: res.data.playerStream})
             })
         ]);

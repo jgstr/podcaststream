@@ -14,7 +14,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             status: "",
-            streams: []
+            streams: [],
+            playerStream: {}
         };
     }
 
@@ -36,7 +37,6 @@ class App extends React.Component {
             <div className="App">
                 <StreamerStatus status={this.state.status}/>
                 <TopStreams streams={this.state.streams}/>
-                {/*<Player streamProperties={{name: "Name 1", length: "2200"}}/>*/}
                 <Player playerStream={this.state.playerStream}/>
             </div>
         );

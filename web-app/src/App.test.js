@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import {TopStreams} from './Components/TopStreams';
 import {Player} from './Components/Player';
-
 import {configure, shallow, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
 configure({adapter: new Adapter()});
-
 import nock from 'nock';
+import {getAllRequestData} from "./utils/testUtilities";
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -19,23 +17,7 @@ it('renders without crashing', () => {
 
 it('renders the TopStreams component', async () => {
 
-    nock('http://localhost:9000')
-        .defaultReplyHeaders({"access-control-allow-origin": "*"})
-        .get('/get-all')
-        .times(3)
-        .reply(200,{
-            status: "Up",
-            streams: [{
-                name: 'name1'
-            }, {
-                name: 'name2'
-            }],
-            playerStream: {
-                name: 'Name 1',
-                length: '2200'
-            }
-        });
-
+    getAllRequestData();
 
     const wrapper = shallow(<App/>);
     await wrapper.instance().componentDidMount();
@@ -55,23 +37,8 @@ it('renders the TopStreams component', async () => {
 });
 
 it('renders the Player component', async () => {
-
-    nock('http://localhost:9000')
-        .defaultReplyHeaders({"access-control-allow-origin": "*"})
-        .get('/get-all')
-        .times(3)
-        .reply(200,{
-            status: "Up",
-            streams: [{
-                name: 'name1'
-            }, {
-                name: 'name2'
-            }],
-            playerStream: {
-                name: 'Name 1',
-                length: '2200'
-            }
-        });
+    
+    getAllRequestData();
 
     const wrapper = shallow(<App/>);
     await wrapper.instance().componentDidMount();

@@ -10,7 +10,10 @@ export const Player = ({playerStream}) => {
         );
     } else {
         return (
-            <div></div>
+            <section id="player">
+                <h1 className="streamProperty">No data sent</h1>
+                <span className="streamProperty">No data sent</span>
+            </section>
         );
     }
 

@@ -37,7 +37,7 @@ it('renders the TopStreams component', async () => {
 });
 
 it('renders the Player component', async () => {
-    
+
     getAllRequestData();
 
     const wrapper = shallow(<App/>);

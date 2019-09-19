@@ -23,9 +23,8 @@ class App extends React.Component {
 
         return Promise.all([
             axios.get(`http://localhost:9000/get-all`).then(res => {
-                this.setState({status: res.data.status});
-                this.setState({streams: res.data.streams});
-                this.setState({playerStream: res.data.playerStream})
+                const {status, streams, playerStream} = res.data;
+                this.setState({status, streams, playerStream});
             })
         ]);
 

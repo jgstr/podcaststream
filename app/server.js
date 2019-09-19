@@ -2,11 +2,9 @@
 const express = require('express');
 const request = require('request');
 
-// Constants
 const PORT = 9000;
 const HOST = '0.0.0.0';
 
-// Connect to MySQL Database
 const mysql = require('mysql');
 const pool = mysql.createPool({
     host: process.env.DATABASE_HOST || 'broadcaststream_db_1',
@@ -21,7 +19,7 @@ const getBroadcasterUrl = () => {
 
     return new Promise( (resolve, reject) => {
 
-    const connection = pool.getConnection((error, connection) => {
+    pool.getConnection((error, connection) => {
 
         if (error) {
             reject(error);

@@ -5,4 +5,4 @@
 //    MySQL is (ie, the host/port/username/pass etc.)
 // 4. Use the data-store function and getting correct results.
 // -  Problems: no functions exist yet. Every read needs to have a corresponding
-//    write***. Write something using adapter then read something using adapter.
+//    write ***. Write something using adapter then read something using adapter.

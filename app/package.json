@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "The server for the audio broadcasting app.",
   "main": "app.js",
-  "scripts": {},
+  "scripts": {
+    "test": "mocha --require @babel/register"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jgstr/podcaststream.git"

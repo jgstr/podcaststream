@@ -9,29 +9,26 @@ describe("Data Store", function () {
     before(function () {
 
         compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
-            .then(
-                () => {
+            .then( () => {
 
-                    // Wrap this in a timeout() at first, then attempt with retry().
-                    setTimeout(() => {
+                    const pool = mysql.createPool({
+                        host: process.env.DATABASE_HOST || 'broadcaststream_db_1',
+                        port: 3306,
+                        user: 'root',
+                        password: 'root',
+                        database: 'broadcast'
+                    });
 
-                        const pool = mysql.createPool({
-                            host: process.env.DATABASE_HOST || 'broadcaststream_db_1',
-                            port: 3306,
-                            user: 'root',
-                            password: 'root',
-                            database: 'broadcast'
-                        });
+                    console.log("*** Pool created. ***");
 
-                        console.log("*** Pool created. ***");
-
-                    }, 5000);
 
                     return console.log("Docker-compose ran.");
                 },
+
                 err => {
                     return console.log("Problems with Docker-compose: ", err.message)
                 }
+
             );
     });
 

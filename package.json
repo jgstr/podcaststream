@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha --require @babel/register",
     "e2e": "nightwatch",
-    "build-server": "docker build -t podcaststream_app ./app",
+    "build-server": "docker build -t podcaststream_app server",
     "build-web-app": "cd web-app; npm run build && cd - && docker build -t podcaststream_web-app ./web-app"
   },
   "repository": {

@@ -1,14 +1,18 @@
-const path = require('path');
-const compose = require('docker-compose/index');
-const mysql = require('mysql');
-const chai = require('chai');
-const expect = chai.expect;
+import path from 'path';
+import compose from 'docker-compose/index';
+import mysql from 'mysql';
+import {expect} from 'chai';
+import {createDataStore} from '../data-store';
 
 describe("Data Store", function () {
 
+    this.timeout(20000);
+
+    let pool = null;
+
     before(function () {
 
-        compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
+        pool = compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
             .then( () => {
 
                     const pool = mysql.createPool({
@@ -22,14 +26,12 @@ describe("Data Store", function () {
                     console.log("*** Pool created. ***");
 
 
-                    return console.log("Docker-compose ran.");
-                },
+                    return pool;
 
-                err => {
-                    return console.log("Problems with Docker-compose: ", err.message)
                 }
 
             );
+        return pool;
     });
 
     // TODO - Challenge: get the adapter result from above Promise into the it() test below.
@@ -39,8 +41,18 @@ describe("Data Store", function () {
     // - Write something using ADAPTER then read something using ADAPTER.
 
     it("should return a broadcast URL from the database", function () {
-        const broadcastUrl = "";
-        return expect(broadcastUrl).to.equal('http://broadcast-server:9001/broadcast-server-status');
+
+        return pool.then( (connectionPool) => {
+
+            const dataStore = createDataStore(connectionPool);
+            return dataStore.getBroadcastURL();
+
+        }).then( (broadcastUrl) => {
+
+            return expect(broadcastUrl).to.equal('http://broadcast-server:9001/broadcast-server-status');
+
+        } );
+
     });
 
     after(function () {

@@ -5,7 +5,6 @@ import {expect} from 'chai';
 import {createDataStore} from '../data-store';
 
 describe("Data Store", function () {
-
     this.timeout(20000);
 
     let pool = null;
@@ -15,8 +14,11 @@ describe("Data Store", function () {
         pool = compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
             .then( () => {
 
+                    // TODO: This tries to connect too soon. Make it wait longer for
+                    // mysql to start.
+
                     const pool = mysql.createPool({
-                        host: process.env.DATABASE_HOST || 'broadcaststream_db_1',
+                        host: 'localhost',
                         port: 3306,
                         user: 'root',
                         password: 'root',
@@ -24,7 +26,6 @@ describe("Data Store", function () {
                     });
 
                     console.log("*** Pool created. ***");
-
 
                     return pool;
 

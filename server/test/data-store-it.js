@@ -5,55 +5,47 @@ import {expect} from 'chai';
 import {createDataStore} from '../data-store';
 
 describe("Data Store", function () {
-    this.timeout(20000);
+    this.timeout(60000);
 
     let pool = null;
 
     before(function () {
 
-        pool = compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
-            .then( () => {
-
-                    // TODO: This tries to connect too soon. Make it wait longer for
-                    // mysql to start.
-
-                    const pool = mysql.createPool({
-                        host: 'localhost',
-                        port: 3306,
-                        user: 'root',
-                        password: 'root',
-                        database: 'broadcast'
-                    });
-
-                    console.log("*** Pool created. ***");
-
-                    return pool;
-
+        function testDatabase(resolve) {
+            console.log(" *** Test Database Running *** ");
+            pool.query("SELECT 1", (error, results, fields) => {
+                if (error) {
+                    console.log(" *** Scheduling Retry *** Error: ", error);
+                    setTimeout(() => {
+                        testDatabase(resolve);
+                    }, 500);
+                } else {
+                    console.log(" *** Database Running *** ");
+                    resolve();
                 }
+            });
+        }
 
-            );
-        return pool;
+        return compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
+            .then( () => {
+                pool = mysql.createPool({
+                    host: 'localhost',
+                    port: 3306,
+                    user: 'root',
+                    password: 'root',
+                    database: 'broadcast'
+                });
+            })
+            .then( () => new Promise((resolve, reject) => {
+                testDatabase(resolve);
+            }));
     });
 
-    // TODO - Challenge: get the adapter result from above Promise into the it() test below.
-    // Note:
-    // - No functions in data-store exist yet.
-    // - Every READ needs to have a corresponding WRITE
-    // - Write something using ADAPTER then read something using ADAPTER.
-
     it("should return a broadcast URL from the database", function () {
-
-        return pool.then( (connectionPool) => {
-
-            const dataStore = createDataStore(connectionPool);
-            return dataStore.getBroadcastURL();
-
-        }).then( (broadcastUrl) => {
-
+        const dataStore = createDataStore(pool);
+        return dataStore.getBroadcastURL().then( (broadcastUrl) => {
             return expect(broadcastUrl).to.equal('http://broadcast-server:9001/broadcast-server-status');
-
-        } );
-
+        });
     });
 
     after(function () {

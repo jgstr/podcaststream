@@ -30,7 +30,7 @@ describe("Data Store", function () {
             .then( () => {
                 pool = mysql.createPool({
                     host: 'localhost',
-                    port: 3306,
+                    port: 9000,
                     user: 'root',
                     password: 'root',
                     database: 'broadcast'

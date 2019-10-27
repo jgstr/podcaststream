@@ -3,3 +3,5 @@ version: '3'
 services:
   db:
     build: ./test-database
+    ports:
+      - 9000:3306

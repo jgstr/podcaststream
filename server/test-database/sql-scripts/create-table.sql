@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS 'broadcast';
+CREATE DATABASE IF NOT EXISTS broadcast;
 
 GRANT ALL PRIVILEGES ON broadcast.* TO root;
 

@@ -15,7 +15,7 @@ describe("Data Store", function () {
             console.log(" *** Test Database Running *** ");
             pool.query("SELECT 1", (error, results, fields) => {
                 if (error) {
-                    console.log(" *** Scheduling Retry *** Error: ", error);
+                    console.log(" *** Error. Scheduling Retry *** ");
                     setTimeout(() => {
                         testDatabase(resolve);
                     }, 500);
@@ -43,8 +43,9 @@ describe("Data Store", function () {
 
     it("should return a broadcast URL from the database", function () {
         const dataStore = createDataStore(pool);
+        dataStore.saveBroadcastURL('http://broadcast-server:9001/broadcast-server-status-2');
         return dataStore.getBroadcastURL().then( (broadcastUrl) => {
-            return expect(broadcastUrl).to.equal('http://broadcast-server:9001/broadcast-server-status');
+            return expect(broadcastUrl).to.equal('http://broadcast-server:9001/broadcast-server-status-2');
         });
     });
 

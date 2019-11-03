@@ -44,7 +44,8 @@ describe("Data Store", function () {
     it("should return a broadcast URL from the database", function () {
         const dataStore = createDataStore(pool);
         dataStore.saveBroadcastURL('http://broadcast-server:9001/broadcast-server-status-2');
-        return dataStore.getBroadcastURL().then( (broadcastUrl) => {
+        const getBroadcastQuery = "SELECT * FROM broadcaster WHERE id=2 LIMIT 1";
+        return dataStore.getBroadcastURL(getBroadcastQuery).then( (broadcastUrl) => {
             return expect(broadcastUrl).to.equal('http://broadcast-server:9001/broadcast-server-status-2');
         });
     });

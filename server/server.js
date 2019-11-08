@@ -1,6 +1,7 @@
 'use strict';
 const express = require('express');
 const request = require('request');
+import {createDataStore} from "./data-store";
 
 const PORT = 9000;
 const HOST = '0.0.0.0';
@@ -14,62 +15,16 @@ const pool = mysql.createPool({
     database: 'broadcast'
 });
 
-
-const getBroadcasterUrl = () => {
-
-    return new Promise( (resolve, reject) => {
-
-    pool.getConnection((error, connection) => {
-
-        if (error) {
-            reject(error);
-
-        } else {
-
-            connection.query('SELECT * FROM broadcaster WHERE id=1 LIMIT 1', function (error, results, fields) {
-
-                connection.release();
-
-                if (error) {
-                    reject(error);
-
-                } else {
-
-                    const broadcastServerUrl = results[0].url;
-
-                    console.log('The broadcast URL is: ', broadcastServerUrl);
-
-                    resolve(broadcastServerUrl);
-
-
-                }
-
-            });
-        }
-
-    });
-
-});
-
-};
-
-
 function getBroadcastServerStatus(broadcastUrl) {
-
     return new Promise ((resolve, reject) => {
-
         request(broadcastUrl, function (error, response, html) {
-
             if (!error && response.statusCode === 200) {
                 resolve(JSON.parse(html).status);
             } else {
                 reject(error);
             }
-
         });
-
     });
-
 }
 
 
@@ -81,9 +36,12 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/server-status', (req, res) => {
+let query = "SELECT * FROM broadcaster WHERE id=1 LIMIT 1";
 
-    getBroadcasterUrl()
+app.get('/server-status', (req, res) => {
+    const dataStore = createDataStore(pool);
+
+    dataStore.getBroadcastURL(query)
         .then( (broadcastUrl) => {
             return getBroadcastServerStatus(broadcastUrl);
         })
@@ -96,7 +54,6 @@ app.get('/server-status', (req, res) => {
             res.status(500);
             res.send(`Something went wrong with the server: ${error}`);
         });
-
 });
 
 

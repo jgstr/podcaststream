@@ -2,7 +2,7 @@
   "name": "podcaststream-server",
   "version": "1.0.0",
   "description": "The server for the audio broadcasting app.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha --require @babel/register",
     "build-server-test-db": "docker build -t server_db ./test-database",

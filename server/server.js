@@ -1,7 +1,8 @@
 'use strict';
 const express = require('express');
 const request = require('request');
-import {createDataStore} from "./data-store";
+// import {createDataStore} from "./data-store";
+const createDataStore = require('./data-store');
 
 const PORT = 9000;
 const HOST = '0.0.0.0';

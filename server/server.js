@@ -1,8 +1,20 @@
+/**
+ * System topology:
+ *
+ * -------   --------      -------
+ * | web |==>|server|=====>| db  |
+ * |_____|DNS|______|config|_____|
+ *               ||
+ *               \/ setting
+ *           ----------
+ *           |streamer|
+ *           |________|
+ */
+
 'use strict';
 const express = require('express');
 const request = require('request');
-// import {createDataStore} from "./data-store";
-const createDataStore = require('./data-store');
+import {createDataStore} from "./data-store";
 
 const PORT = 9000;
 const HOST = '0.0.0.0';

@@ -20,6 +20,7 @@ export const createDataStore = (pool) => {
             });
         },
         saveBroadcastURL: (broadcastURL) => {
+            // Might wrap all in promise if getConnection returns no promise, Resolve with nothing
             pool.getConnection((error, connection) => {
                 if (error) {
                     console.log("Error when saving broadcast URL: ", error);

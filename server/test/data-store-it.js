@@ -12,10 +12,8 @@ describe("Data Store", function () {
     before(function () {
 
         function testDatabase(resolve) {
-            console.log(" *** Test Database Running *** ");
             pool.query("SELECT 1", (error, results, fields) => {
                 if (error) {
-                    console.log(" *** Error. Scheduling Retry *** ");
                     setTimeout(() => {
                         testDatabase(resolve);
                     }, 500);
@@ -37,23 +35,24 @@ describe("Data Store", function () {
                 });
             })
             .then( () => new Promise((resolve, reject) => {
+                console.log("*** Waiting for database availability ***")
                 testDatabase(resolve);
             }));
     });
 
     it("should return a broadcast URL from the database", function () {
         const dataStore = createDataStore(pool);
-        const broadcastURL = 'http://broadcast-server:9001/broadcast-server-status-2';
+        const expectedValue = 'http://broadcast-server:9001/broadcast-server-status-2';
 
-        let queryTemplate = "SELECT * FROM broadcaster WHERE url=?";
-        let broadcastURLInsert = [broadcastURL];
-        let query = mysql.format(queryTemplate, broadcastURLInsert);
+        // Move to data-store
+        // return Promise from data-store (save and get)
+        // let queryTemplate = "SELECT * FROM broadcaster WHERE url=?";
+        // let broadcastURLInsert = [expectedValue];
+        // let query = mysql.format(queryTemplate, broadcastURLInsert);
 
-        dataStore.saveBroadcastURL(broadcastURL);
-        const getBroadcastQuery = query;
-        return dataStore.getBroadcastURL(getBroadcastQuery).then( (broadcastUrl) => {
-            return expect(broadcastUrl).to.equal('http://broadcast-server:9001/broadcast-server-status-2');
-        });
+        dataStore.saveBroadcastURL(expectedValue)
+            .then(() => dataStore.getBroadcastURL())
+            .then( (broadcastUrl) => expect(broadcastUrl).to.equal(expectedValue) );
     });
 
     after(function () {

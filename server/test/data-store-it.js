@@ -46,27 +46,18 @@ describe("Data Store", function () {
 
         // Move to data-store
         // return Promise from data-store (save and get)
-        // let queryTemplate = "SELECT * FROM broadcaster WHERE url=?";
-        // let broadcastURLInsert = [expectedValue];
-        // let query = mysql.format(queryTemplate, broadcastURLInsert);
-
         dataStore.saveBroadcastURL(expectedValue)
             .then(() => dataStore.getBroadcastURL())
-            .then( (broadcastUrl) => expect(broadcastUrl).to.equal(expectedValue) );
+            .then( broadcastURL => expect(broadcastURL).to.equal(expectedValue) )
+            .catch( error => console.log("Error: ", error));
     });
 
     after(function () {
         compose
             .down("rmi-all")
             .then(
-                () => {
-                    console.log("Docker down ran successfully");
-                },
-                err => {
-                    console.log("Docker down error: ", err.message);
-                }
+                () => { console.log("Docker down ran successfully"); },
+                err => { console.log("Docker down error: ", err.message); }
             )
     });
-
-
 });

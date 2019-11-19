@@ -9,7 +9,6 @@ import axiosRetry from 'axios-retry';
 axiosRetry(axios, {retryDelay: axiosRetry.exponentialDelay, retries: 20});
 
 class App extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -20,18 +19,15 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-
         return Promise.all([
             axios.get(`http://localhost:9000/get-all`).then(res => {
                 const {status, streams, playerStream} = res.data;
                 this.setState({status, streams, playerStream});
             })
         ]);
-
     }
 
     render() {
-
         return (
             <div className="App">
                 <StreamerStatus status={this.state.status}/>

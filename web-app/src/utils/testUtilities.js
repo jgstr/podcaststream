@@ -1,7 +1,6 @@
 /**
  * Functions to help common tasks for testing.
  */
-
 import {shallow} from "enzyme/build";
 import {TopStreams} from "../Components/TopStreams";
 import React from "react";
@@ -14,7 +13,7 @@ import nock from "nock";
  */
 export const renderTopStreams = streamList => {
     return shallow(<TopStreams streams={streamList}/>);
-}
+};
 
 /**
  *
@@ -24,13 +23,12 @@ export const renderTopStreams = streamList => {
  */
 export const expectTextInElements = (component, selector, textList) => {
     expect(component.find(selector).map(node => node.text())).toEqual(textList);
-}
+};
 
 /**
  * Uses the nock GET/reply feature. Intercepts request() from node and replies with pre-defined HTTP responses.
  */
 export const getAllRequestData = () => {
-
     nock('http://localhost:9000')
         .defaultReplyHeaders({"access-control-allow-origin": "*"})
         .get('/get-all')
@@ -47,4 +45,4 @@ export const getAllRequestData = () => {
                 length: '2200'
             }
         });
-}
+};

@@ -1,16 +1,3 @@
-/**
- * System topology:
- *
- * -------   --------      -------
- * | web |==>|server|=====>| db  |
- * |_____|DNS|______|config|_____|
- *               ||
- *               \/ setting
- *           ----------
- *           |streamer|
- *           |________|
- */
-
 'use strict';
 const express = require('express');
 const request = require('request');

@@ -16,9 +16,7 @@ it('renders without crashing', () => {
 });
 
 it('renders the TopStreams component', async () => {
-
     getAllRequestData();
-
     const wrapper = shallow(<App/>);
     await wrapper.instance().componentDidMount();
 
@@ -37,12 +35,9 @@ it('renders the TopStreams component', async () => {
 });
 
 it('renders the Player component', async () => {
-
     getAllRequestData();
-
     const wrapper = shallow(<App/>);
     await wrapper.instance().componentDidMount();
-
     expect(wrapper.find(Player)).toHaveLength(1);
 });
 

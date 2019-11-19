@@ -10,9 +10,8 @@ describe("Data Store", function () {
     let pool = null;
 
     before(function () {
-
         function testDatabase(resolve) {
-            pool.query("SELECT 1", (error, results, fields) => {
+            pool.query("SELECT 1", (error) => {
                 if (error) {
                     setTimeout(() => {
                         testDatabase(resolve);
@@ -23,7 +22,6 @@ describe("Data Store", function () {
                 }
             });
         }
-
         return compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
             .then( () => {
                 pool = mysql.createPool({
@@ -34,8 +32,8 @@ describe("Data Store", function () {
                     database: 'broadcast'
                 });
             })
-            .then( () => new Promise((resolve, reject) => {
-                console.log("*** Waiting for database availability ***")
+            .then( () => new Promise((resolve) => {
+                console.log("*** Waiting for database availability ***");
                 testDatabase(resolve);
             }));
     });
@@ -44,8 +42,6 @@ describe("Data Store", function () {
         const dataStore = createDataStore(pool);
         const expectedValue = 'http://broadcast-server:9001/broadcast-server-status-2';
 
-        // Move to data-store
-        // return Promise from data-store (save and get)
         dataStore.saveBroadcastURL(expectedValue)
             .then(() => dataStore.getBroadcastURL())
             .then( broadcastURL => expect(broadcastURL).to.equal(expectedValue) )

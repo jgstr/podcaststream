@@ -1,9 +1,7 @@
 import React from 'react';
 
 export const TopStreams = ({streams}) => {
-
     return (
-
         <section id="top-streams">
             {streams && streams.map(stream => (
                 <div>
@@ -15,10 +13,7 @@ export const TopStreams = ({streams}) => {
                     </ol>
 
                 </div>
-
             ))}
         </section>
-
     );
-
 };

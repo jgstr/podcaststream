@@ -27,7 +27,6 @@ function getBroadcastServerStatus(broadcastUrl) {
     });
 }
 
-
 const app = express();
 
 app.use(function(req, res, next) {
@@ -55,9 +54,6 @@ app.get('/server-status', (req, res) => {
             res.send(`Something went wrong with the server: ${error}`);
         });
 });
-
-
-
 
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

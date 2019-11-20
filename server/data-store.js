@@ -2,8 +2,9 @@ import mysql from 'mysql';
 
 export const createDataStore = (pool) => {
     return {
-        getBroadcastURL: (broadcastQuery) => {
-            let query = mysql.format("SELECT * FROM broadcaster WHERE url=?", [broadcastQuery]);
+        getBroadcastURL: () => {
+            let query = mysql.format('SELECT * FROM settings WHERE key=?', ['broadcastURL']);
+
             return new Promise((resolve, reject) => {
                 pool.getConnection((error, connection) => {
                     if (error) {
@@ -14,7 +15,7 @@ export const createDataStore = (pool) => {
                             if (error) {
                                 reject(error);
                             } else {
-                                const broadcastServerUrl = results[0].url;
+                                const broadcastServerUrl = results[0].value;
                                 resolve(broadcastServerUrl);
                             }
                         });
@@ -23,19 +24,18 @@ export const createDataStore = (pool) => {
             });
         },
         saveBroadcastURL: (broadcastURL) => {
+            let query = mysql.format('INSERT INTO settings VALUES(?,?)', ['broadcastURL', broadcastURL]);
             return new Promise((resolve, reject) => {
                 pool.getConnection((error, connection) => {
                     if (error) {
                         reject(error);
                     } else {
-                        let broadcastUrlEntry = {id: 2, url: broadcastURL};
-                        connection.query('INSERT INTO broadcaster SET ?', broadcastUrlEntry, function (error) {
-                            if (error) throw error;
+                        connection.query(query, function (error) {
+                            if (error) reject(error);
                         });
                         resolve();
                     }
                 });
-
             });
         }
     };

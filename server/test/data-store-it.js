@@ -22,8 +22,11 @@ describe("Data Store", function () {
                 }
             });
         }
+
+        // Somehow use compose.buildAll(options) here.
+        // But how to handle the Promise returned from .buildAll()???
         return compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
-            .then( () => {
+            .then(() => {
                 pool = mysql.createPool({
                     host: 'localhost',
                     port: 9000,
@@ -32,7 +35,7 @@ describe("Data Store", function () {
                     database: 'broadcast'
                 });
             })
-            .then( () => new Promise((resolve) => {
+            .then(() => new Promise((resolve) => {
                 console.log("*** Waiting for database availability ***");
                 testDatabase(resolve);
             }));
@@ -42,18 +45,37 @@ describe("Data Store", function () {
         const dataStore = createDataStore(pool);
         const expectedValue = 'http://broadcast-server:9001/broadcast-server-status-2';
 
-        dataStore.saveBroadcastURL(expectedValue)
+        return dataStore.saveBroadcastURL(expectedValue)
             .then(() => dataStore.getBroadcastURL())
-            .then( broadcastURL => expect(broadcastURL).to.equal(expectedValue) )
-            .catch( error => console.log("Error: ", error));
+            .then(broadcastURL => expect(broadcastURL).to.equal(expectedValue));
     });
 
-    after(function () {
-        compose
-            .down("rmi-all")
-            .then(
-                () => { console.log("Docker down ran successfully"); },
-                err => { console.log("Docker down error: ", err.message); }
-            )
+    after(function (done) {
+        console.log("After hit in test.");
+        if (pool) {
+            pool.end((err) => {
+                compose
+                    .down("rmi-all")
+                    .then(
+                        () => {
+                            console.log("Docker down ran successfully");
+                        },
+                        err => {
+                            console.log("Docker down error: ", err.message);
+                        }
+                    ).then(() => done());
+            });
+        } else {
+            compose
+                .down("rmi-all")
+                .then(
+                    () => {
+                        console.log("Docker down ran successfully");
+                    },
+                    err => {
+                        console.log("Docker down error: ", err.message);
+                    }
+                ).then(() => done());
+        }
     });
 });

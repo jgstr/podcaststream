@@ -3,7 +3,7 @@ import mysql from 'mysql';
 export const createDataStore = (pool) => {
     return {
         getBroadcastURL: () => {
-            let query = mysql.format('SELECT * FROM settings WHERE key=?', ['broadcastURL']);
+            let query = mysql.format('SELECT * FROM settings WHERE broadcast_key=?', ['broadcastURL']);
 
             return new Promise((resolve, reject) => {
                 pool.getConnection((error, connection) => {

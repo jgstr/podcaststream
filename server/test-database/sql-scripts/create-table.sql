@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS broadcast;
 
-GRANT ALL PRIVILEGES ON broadcast.* TO root;
+GRANT ALL PRIVILEGES ON broadcast.* TO 'root';
 
 CREATE TABLE settings (
-    key VARCHAR(100) PRIMARY KEY,
+    broadcast_key VARCHAR(100) PRIMARY KEY,
     value VARCHAR(255) NOT NULL
-);
+    );

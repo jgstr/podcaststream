@@ -16,7 +16,7 @@ const pool = mysql.createPool({
 });
 
 function getBroadcastServerStatus(broadcastUrl) {
-    return new Promise ((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         request(broadcastUrl, function (error, response, html) {
             if (!error && response.statusCode === 200) {
                 resolve(JSON.parse(html).status);
@@ -29,27 +29,25 @@ function getBroadcastServerStatus(broadcastUrl) {
 
 const app = express();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
 
-let query = "SELECT * FROM broadcaster WHERE id=1 LIMIT 1";
-
 app.get('/server-status', (req, res) => {
     const dataStore = createDataStore(pool);
 
-    dataStore.getBroadcastURL(query)
-        .then( (broadcastUrl) => {
+    dataStore.getBroadcastURL()
+        .then((broadcastUrl) => {
             return getBroadcastServerStatus(broadcastUrl);
         })
-        .then( (status) => {
+        .then((status) => {
             res.send({
                 status
             });
         })
-        .catch( (error) => {
+        .catch((error) => {
             res.status(500);
             res.send(`Something went wrong with the server: ${error}`);
         });

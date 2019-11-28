@@ -41,7 +41,6 @@ describe("Podcaststream Broadcaster", function () {
     };
 
     it("should return a running status", function (browser) {
-        console.log("*** Session Id: ", browser.sessionId);
         return fetchPage(browser).then(() => {
             browser.expect.element(streamerStatusSelector).text.to.equal("Up").after(30000);
         });

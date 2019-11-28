@@ -36,16 +36,17 @@
     "sinon": "^7.2.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/node": "^7.2.2",
+    "@babel/cli": "^7.7.4",
+    "@babel/core": "^7.7.4",
+    "@babel/node": "^7.7.4",
     "@babel/preset-env": "^7.3.1",
-    "@babel/register": "^7.0.0",
+    "@babel/register": "^7.7.4",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "chromedriver": "^78.0.1",
     "docker-compose": "^0.14.1",
     "mocha": "^5.2.0",
+    "nock": "^11.7.0",
     "node-docker-api": "^1.1.22",
     "nodemon": "^1.18.10"
   }

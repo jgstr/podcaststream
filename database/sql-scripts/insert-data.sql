@@ -1,3 +1,3 @@
-INSERT INTO broadcaster (url)
-VALUES
-    ('http://broadcast-server:9001/broadcast-server-status');
+INSERT INTO settings VALUES
+    ('broadcastURL',
+     'http://broadcast-server:9001/broadcast-server-status');

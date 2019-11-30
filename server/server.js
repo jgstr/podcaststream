@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/server-status', (req, res) => {
+app.get('/get-all', (req, res) => {
     const dataStore = createDataStore(pool);
 
     dataStore.getBroadcastURL()
@@ -44,7 +44,16 @@ app.get('/server-status', (req, res) => {
         })
         .then((status) => {
             res.send({
-                status
+                status,
+                streams: [{
+                    name: 'name1'
+                }, {
+                    name: 'name2'
+                }],
+                playerStream: {
+                    name: 'Name 1',
+                    length: '2200'
+                }
             });
         })
         .catch((error) => {

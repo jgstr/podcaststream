@@ -2,18 +2,12 @@
 const express = require('express');
 const request = require('request');
 import {createDataStore} from "./data-store";
+import {createPool} from "./utils/utilities";
 
 const PORT = 9000;
 const HOST = '0.0.0.0';
 
-const mysql = require('mysql');
-const pool = mysql.createPool({
-    host: process.env.DATABASE_HOST || 'broadcaststream_db_1',
-    port: 3306,
-    user: 'root',
-    password: 'root',
-    database: 'broadcast'
-});
+const pool = createPool();
 
 function getBroadcastServerStatus(broadcastUrl) {
     return new Promise((resolve, reject) => {

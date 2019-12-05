@@ -25,6 +25,7 @@ export const createDataStore = (pool) => {
         },
         saveBroadcastURL: (broadcastURL) => {
             let query = mysql.format('INSERT INTO settings VALUES(?,?)', ['broadcastURL', broadcastURL]);
+
             return new Promise((resolve, reject) => {
                 pool.getConnection((error, connection) => {
                     if (error) {
@@ -40,9 +41,19 @@ export const createDataStore = (pool) => {
         },
         saveStream: (stream) => {
             let query = mysql.format('INSERT INTO stream VALUES(?,?)', [1, stream]);
+
             return new Promise((resolve, reject) => {
-                resolve();
-            })
+                pool.getConnection((error, connection) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        connection.query(query, function (error) {
+                            if (error) reject(error);
+                        });
+                        resolve();
+                    }
+                });
+            });
         },
         getAllStreams: () => {
             return new Promise((resolve, reject) => {

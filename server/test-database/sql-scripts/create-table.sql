@@ -6,7 +6,12 @@ CREATE DATABASE IF NOT EXISTS broadcast;
 
 GRANT ALL PRIVILEGES ON broadcast.* TO 'root';
 
-CREATE TABLE settings (
+CREATE TABLE IF NOT EXISTS settings (
     broadcast_key VARCHAR(100) PRIMARY KEY,
+    value VARCHAR(255) NOT NULL
+    );
+
+CREATE TABLE IF NOT EXISTS streams (
+    id TINYINT PRIMARY KEY NOT NULL,
     value VARCHAR(255) NOT NULL
     );

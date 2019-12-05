@@ -23,8 +23,6 @@ describe("Data Store", function () {
             });
         }
 
-        // Somehow use compose.buildAll(options) here.
-        // But how to handle the Promise returned from .buildAll()???
         return compose.upAll({cwd: path.join(__dirname, "..", "/test-database/"), log: true})
             .then(() => {
                 pool = mysql.createPool({
@@ -48,6 +46,15 @@ describe("Data Store", function () {
         return dataStore.saveBroadcastURL(expectedValue)
             .then(() => dataStore.getBroadcastURL())
             .then(broadcastURL => expect(broadcastURL).to.equal(expectedValue));
+    });
+
+    it("should return a list of all streams", function () {
+        const dataStore = createDataStore(pool);
+        const expectedValue = [{name: 'name1'}, {name: 'name2'}];
+        return dataStore.saveStream(expectedValue[0].toString())
+            .then(() => dataStore.saveStream(expectedValue[1].toString()))
+            .then(() => dataStore.getAllStreams())
+            .then(allStreams => expect(allStreams).to.deep.equal(expectedValue));
     });
 
     after(function (done) {

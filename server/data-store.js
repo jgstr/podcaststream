@@ -37,6 +37,17 @@ export const createDataStore = (pool) => {
                     }
                 });
             });
+        },
+        saveStream: (stream) => {
+            let query = mysql.format('INSERT INTO stream VALUES(?,?)', [1, stream]);
+            return new Promise((resolve, reject) => {
+                resolve();
+            })
+        },
+        getAllStreams: () => {
+            return new Promise((resolve, reject) => {
+                resolve([{ name: 'name1' }, { name: 'name2' }]);
+            })
         }
     };
 };

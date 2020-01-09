@@ -5,7 +5,7 @@ import {expect} from 'chai';
 import {createDataStore} from '../data-store';
 
 describe("Data Store", function () {
-    this.timeout(60000);
+    this.timeout(300000);
 
     let pool = null;
 
@@ -51,9 +51,13 @@ describe("Data Store", function () {
     it("should return a list of all streams", function () {
         const dataStore = createDataStore(pool);
         const expectedValue = [{name: 'name1'}, {name: 'name2'}];
-        return dataStore.saveStream(expectedValue[0].toString())
-            .then(() => dataStore.saveStream(expectedValue[1].toString()))
-            .then(() => dataStore.getAllStreams())
+        return dataStore.saveStream(expectedValue[0])
+            .then(() => dataStore.saveStream(expectedValue[1]))
+            .then(() => {
+                console.log("*** While Loop Debugger Running ***");
+                while (true);
+                dataStore.getAllStreams();
+            })
             .then(allStreams => expect(allStreams).to.deep.equal(expectedValue));
     });
 

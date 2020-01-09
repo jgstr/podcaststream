@@ -32,6 +32,7 @@ export const createDataStore = (pool) => {
                         reject(error);
                     } else {
                         connection.query(query, function (error) {
+                            connection.release();
                             if (error) reject(error);
                         });
                         resolve();
@@ -40,14 +41,15 @@ export const createDataStore = (pool) => {
             });
         },
         saveStream: (stream) => {
-            let query = mysql.format('INSERT INTO stream VALUES(?,?)', [1, stream]);
-
             return new Promise((resolve, reject) => {
                 pool.getConnection((error, connection) => {
                     if (error) {
                         reject(error);
                     } else {
-                        connection.query(query, function (error) {
+                        // TODO: This saves. Now get the dynamic data to save instead.
+                        connection.query('INSERT INTO streams (id, value) VALUES(1, "test")', `{value: ${stream}}`, function (error) {
+                            connection.release();
+                            console.log("*** SaveStream Attempt ***");
                             if (error) reject(error);
                         });
                         resolve();
@@ -56,9 +58,26 @@ export const createDataStore = (pool) => {
             });
         },
         getAllStreams: () => {
+            let query = mysql.format("SELECT * FROM 'streams'");
+
             return new Promise((resolve, reject) => {
-                resolve([{ name: 'name1' }, { name: 'name2' }]);
-            })
+                pool.getConnection((error, connection) => {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        connection.query(query, function (error, results, fields) {
+                            console.log("*** GetAllStreams Attempt ***");
+                            connection.release();
+                            if (error) {
+                                reject(error);
+                            } else {
+                                const allStreams = results;
+                                resolve(allStreams);
+                            }
+                        });
+                    }
+                });
+            });
         }
     };
 };

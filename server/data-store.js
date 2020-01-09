@@ -46,10 +46,8 @@ export const createDataStore = (pool) => {
                     if (error) {
                         reject(error);
                     } else {
-                        // TODO: This saves. Now get the dynamic data to save instead.
-                        connection.query('INSERT INTO streams (id, value) VALUES(1, "test")', `{value: ${stream}}`, function (error) {
+                        connection.query('INSERT INTO streams (title) VALUES(?)', `${stream.title}`, function (error) {
                             connection.release();
-                            console.log("*** SaveStream Attempt ***");
                             if (error) reject(error);
                         });
                         resolve();
@@ -58,11 +56,13 @@ export const createDataStore = (pool) => {
             });
         },
         getAllStreams: () => {
-            let query = mysql.format("SELECT * FROM 'streams'");
+            let query = mysql.format("SELECT * FROM streams");
 
             return new Promise((resolve, reject) => {
                 pool.getConnection((error, connection) => {
                     if (error) {
+                        // TODO: "Error: Pool is closed" occurs.
+                        console.log("*** Got to getAllStreams getConnection Error ***");
                         reject(error);
                     } else {
                         connection.query(query, function (error, results, fields) {
@@ -72,6 +72,7 @@ export const createDataStore = (pool) => {
                                 reject(error);
                             } else {
                                 const allStreams = results;
+                                console.log("*** All Streams: ", allStreams);
                                 resolve(allStreams);
                             }
                         });

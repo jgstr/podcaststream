@@ -50,12 +50,10 @@ describe("Data Store", function () {
 
     it("should return a list of all streams", function () {
         const dataStore = createDataStore(pool);
-        const expectedValue = [{name: 'name1'}, {name: 'name2'}];
+        const expectedValue = [{title: 'title1'}, {title: 'title2'}];
         return dataStore.saveStream(expectedValue[0])
             .then(() => dataStore.saveStream(expectedValue[1]))
             .then(() => {
-                console.log("*** While Loop Debugger Running ***");
-                while (true);
                 dataStore.getAllStreams();
             })
             .then(allStreams => expect(allStreams).to.deep.equal(expectedValue));

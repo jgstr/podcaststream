@@ -49,8 +49,8 @@ export const createDataStore = (pool) => {
                         connection.query('INSERT INTO streams (title) VALUES(?)', `${stream.title}`, function (error) {
                             connection.release();
                             if (error) reject(error);
+                            resolve();
                         });
-                        resolve();
                     }
                 });
             });

@@ -56,7 +56,9 @@ describe("Data Store", function () {
             .then(() => dataStore.saveStream(expectedValue[2]))
             .then(() => dataStore.getAllStreams())
             .then(allStreams => {
-                expect(allStreams[0]["title"]).to.deep.equal(expectedValue[0]["title"]);
+                let allStreamsTitlesOnly = [];
+                allStreams.forEach(row => allStreamsTitlesOnly.push({"title": row["title"]}));
+                expect(allStreamsTitlesOnly).to.deep.equal(expectedValue);
             });
     });
 

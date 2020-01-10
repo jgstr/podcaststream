@@ -50,17 +50,17 @@ describe("Data Store", function () {
 
     it("should return a list of all streams", function () {
         const dataStore = createDataStore(pool);
-        const expectedValue = [{title: 'title1'}, {title: 'title2'}];
+        const expectedValue = [{title: 'title1'}, {title: 'title2'}, {title: 'title3'}];
         return dataStore.saveStream(expectedValue[0])
             .then(() => dataStore.saveStream(expectedValue[1]))
-            .then(() => {
-                dataStore.getAllStreams();
-            })
-            .then(allStreams => expect(allStreams).to.deep.equal(expectedValue));
+            .then(() => dataStore.saveStream(expectedValue[2]))
+            .then(() => dataStore.getAllStreams())
+            .then(allStreams => {
+                expect(allStreams[0]["title"]).to.deep.equal(expectedValue[0]["title"]);
+            });
     });
 
     after(function (done) {
-        console.log("After hit in test.");
         if (pool) {
             pool.end((err) => {
                 compose

@@ -56,23 +56,19 @@ export const createDataStore = (pool) => {
             });
         },
         getAllStreams: () => {
-            let query = mysql.format("SELECT * FROM streams");
+            let query = mysql.format('SELECT * FROM streams');
 
             return new Promise((resolve, reject) => {
                 pool.getConnection((error, connection) => {
                     if (error) {
-                        // TODO: "Error: Pool is closed" occurs.
-                        console.log("*** Got to getAllStreams getConnection Error ***");
                         reject(error);
                     } else {
                         connection.query(query, function (error, results, fields) {
-                            console.log("*** GetAllStreams Attempt ***");
                             connection.release();
                             if (error) {
                                 reject(error);
                             } else {
                                 const allStreams = results;
-                                console.log("*** All Streams: ", allStreams);
                                 resolve(allStreams);
                             }
                         });
